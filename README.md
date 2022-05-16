@@ -10,5 +10,5 @@ cd ..
 git add .
 git commit -m "test1"
 git push origin main
-open -a "Google Chrome" https://github.com/Jinzhao-Yu/Learning-Notes/
+open -a "Google Chrome" https://github.com/Jinzhao-Yu/Learning-Notes/deployments/
 ```
