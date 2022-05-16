@@ -18,6 +18,6 @@ rm -r _build
 cd ..
 git add .
 git commit -m "update log"
-git push origin main
-open -a "Google Chrome" https://github.com/Jinzhao-Yu/Learning-Notes/deployments/
+git push
+open -a "Google Chrome" https://github.com/Jinzhao-Yu/Learning-Notes/actions/
 ```
