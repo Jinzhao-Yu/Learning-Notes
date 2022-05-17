@@ -6,4 +6,5 @@ root: intro
 parts:
   - caption: Data Structure
     chapters:
-      - file: datastructure
+      - file: Data_structure/README.md
+      - file: Data_structure/datastructure.md
