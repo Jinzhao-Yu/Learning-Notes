@@ -3,7 +3,7 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: datastructure
-- file: deeplearning
-- file: quantskills
+parts:
+  - caption: Data Structure
+    chapters:
+      - file: datastructure
