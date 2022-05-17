@@ -7,4 +7,4 @@ parts:
   - caption: Data Structure
     chapters:
       - file: Data_structure/README.md
-      - file: Data_structure/datastructure.md
+      - file: Data_structure/data_structure.md
