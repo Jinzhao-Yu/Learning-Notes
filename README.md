@@ -1,5 +1,5 @@
 # Learning-Notes
-This is the learning notes of Jinzhao, containing all things that I'm trying to handle.\
+This is the learning notes of Jinzhao, containing all things that I'm trying to handle.
 
 - Everytime change the contents, run the code below in the terminal
 - preview the result
