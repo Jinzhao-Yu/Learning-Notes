@@ -1,11 +1,12 @@
-# Welcome to your Jupyter Book
+# Jinzhao's Mind Palance
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Welcome to the mind palance of Jinzhao!
 
-Check out the content pages bundled with this sample book to see more.
+Unlike Sherlock Holmes, I cannot save all things into my brain, so a blog/note online could be the best way for me.
 
-```{tableofcontents}
-```
+As I have said in my GitHub profile, I'm pursuing a full-time job of Data Scientist or Machine Learning Enginner from 2023, and there are still many lacks of knowledge or skills for a well-prepared applicant. That's the reason why I build this learning note, to improve myself towards a best applicant for full-time job.
+
+By the way, being a Quant is still my dream job, and I'm always persisting to learn all necessary skills to be an outstanding Quant.
+
+> ***I can do all things.*** <p align="right">——— Wardell Stephen "Steph" Curry II, 2 times NBA MVP, 3 times NBA Champions</p>
+
