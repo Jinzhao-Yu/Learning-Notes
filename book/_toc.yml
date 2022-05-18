@@ -10,7 +10,7 @@ parts:
       - file: Data_structure/data_structure.md
   - caption: Deep Learning
     chapters:
-      - file: Deep_Learning/notebook.ipynb
+      - file: Deep_Learning/notebooks.ipynb
   - caption: Quant Skills
   - caption: Backup Template
     chapters:
