@@ -7,10 +7,14 @@ parts:
   - caption: Data Structure
     chapters:
       - file: Data_structure/README.md
-      - file: Data_structure/data_structure.md
   - caption: Deep Learning
     chapters:
-      - file: Deep_Learning/notebooks.ipynb
+      - file: Deep_Learning/README.md
+  - caption: Quant Skills
+    chapters:
+      - file: Quant/README.md
   - caption: Backup Template
     chapters:
+      - file: markdown.md
+      - file: notebooks.ipynb
       - file: markdown-notebooks.md
