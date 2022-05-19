@@ -9,7 +9,6 @@ parts:
       - file: Data_structure/README.md
   - caption: Deep Learning
     chapters:
-      - file: Deep_Learning/README.md
       - file: Deep_Learning/Pytorch/README.md
         sections:
         - file: Deep_Learning/Pytorch/Pytorch-tutorial1
