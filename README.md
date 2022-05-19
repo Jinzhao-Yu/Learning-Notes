@@ -17,7 +17,7 @@ rm -r _build
 
 cd ..
 git add .
-git commit -m "update log"
+git commit -m "update"
 git push
 open -a "Google Chrome" https://github.com/Jinzhao-Yu/Learning-Notes/actions/
 ```
