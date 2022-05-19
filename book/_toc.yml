@@ -10,6 +10,9 @@ parts:
   - caption: Deep Learning
     chapters:
       - file: Deep_Learning/README.md
+      - file: Deep_Learning/Pytorch/README.md
+        sections:
+        - file: Deep_Learning/Pytorch/Pytorch-tutorial1
   - caption: Quant Skills
     chapters:
       - file: Quant/README.md
