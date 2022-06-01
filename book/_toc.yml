@@ -13,8 +13,8 @@ parts:
         sections:
         - file: Deep_Learning/Pytorch/Pytorch-tutorial1
       - file: Deep_Learning/Related_Papers/README.md
-	sections:
-	- file: Deep_Learning/Related_Papers/cSG-MCMC.md
+        sections:
+        - file: Deep_Learning/Related_Papers/cSG-MCMC.md
   - caption: Quant Skills
     chapters:
       - file: Quant/README.md
