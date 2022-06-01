@@ -13,7 +13,7 @@
 除此之外，文章还提到cSG-MCMC可以看作'an efficient approximation of parallel MCMC', 相比于parallel MCMC可以以更低的cost去获得相似的结果
 ## Algorithm of cSG-MCMC
 在传统SG-MCMC中，sampler会始终在local mode中进行sample，因此文章提出了使用$cos$构造stepsize schedule：The stepsize at iteration k is defined as:\
-$\alpha_k = \frac{\alpha_0}{2}\left\[cos\left\(\frac{\pi\mod(k-1, \lceil K/M \rceil)}{\lceil K/M \rceil}\right\)+1\right\]$\
+$\alpha_k = \frac{\alpha_0}{2}\left[cos\left\(\frac{\pi\mod(k-1, \lceil K/M \rceil)}{\lceil K/M \rceil}\right\)+1 \right]$\
 where $\alpha_0$ is the initial stepsize, $M$ is the number of cycles and $K$ is the number of total iterations.\
 \
 在每一个iteration开始的时候，$\alpha_k$从$\alpha_0$开始不断下降，进入sampling stage后开始collect samples直到结束，而后开始新的iteration，stepsize回到large水平，跳出local mode从而找到新的mode\
