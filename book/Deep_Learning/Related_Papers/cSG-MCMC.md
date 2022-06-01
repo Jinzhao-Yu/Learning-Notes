@@ -15,6 +15,14 @@
 在传统SG-MCMC中，sampler会始终在local mode中进行sample，因此文章提出了使用$cos$构造stepsize schedule：The stepsize at iteration k is defined as:
 $$\alpha_k = \frac{\alpha_0}{2}\left\[cos\left\(\frac{\pi\mod(k-1, \lceil K/M \rceil)}{\lceil K/M \rceil}\right\)+1\right\]$$
 where $\alpha_0$ is the initial stepsize, $M$ is the number of cycles and $K$ is the number of total iterations.\
+\
 在每一个iteration开始的时候，$\alpha_k$从$\alpha_0$开始不断下降，进入sampling stage后开始collect samples直到结束，而后开始新的iteration，stepsize回到large水平，跳出local mode从而找到新的mode\
+\
 根据定义的stepsize schedule，在Exploration stage仍然存在问题，当stepsize too large，SG-MCMC的stationary distribution会与真实的后验分布存在较大的误差，同时在更新过程中会十分容易被拒绝而长时间无法更新降低效率，因此引入了system temperature，但是在文章中选择在exploration stage设定$T=0$, sampling stage设定$T=1$. 在划分两个stage方面，文章选择使用'completed proportion of a cycle' $r(k)=\frac{\mod(k-1, \lceil K/M \rceil)}{\lceil K/M \rceil}$衡量并设定一个threshold，低于边界即进入sampling stage.
-![image](https://github.com/Jinzhao-Yu/Learning-Notes/blob/main/book/Deep_Learning/Related_Papers/images/cSG-MCMC-2.png)\
+![image](https://user-images.githubusercontent.com/105667644/171493212-f7f73a45-d29c-4dc9-86c0-225e9361ff42.png)
+## Experiental Results
+- multi-modal distribution on a 2D mixture of 25 Gaussians\
+SGLD can only discover 4 modes but cSGLD can discover all 25 modes
+- classification on CIFAR-10 and CIFAR-100
+- ImageNet: ResNet-50
+- MNIST and notMNIST
