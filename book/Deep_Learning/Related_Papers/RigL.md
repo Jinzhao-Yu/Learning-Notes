@@ -3,7 +3,7 @@ Training sparse nerual network with fixed parameter count and computational cost
 ## Abstract
 - updates the topology(拓扑结构) of the sparse network during training by using parameter magnitudes and infrequent gradient calculations
 - requires fewer floating-point operations (FLOPs)
-```{notes} FLOPS
+```{note} FLOPS
 FLOPS: floating point operations per second, a measure of computer performance, useful in fields of scientific computations that require floating-point calculations. 
 ```
 - empirical evaluation: ResNet-50, MobileNets on Imagenet-2012, and RNNs on WikiText-103
