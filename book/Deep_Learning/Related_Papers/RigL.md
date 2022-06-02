@@ -3,7 +3,7 @@ Training sparse nerual network with fixed parameter count and computational cost
 ## Abstract
 - updates the topology(拓扑结构) of the sparse network during training by using parameter magnitudes and infrequent gradient calculations
 - requires fewer floating-point operations (FLOPs)
-```{note} FLOPS
+```{admonition} FLOPS
 FLOPS: floating point operations per second, a measure of computer performance, useful in fields of scientific computations that require floating-point calculations. 
 ```
 - empirical evaluation: ResNet-50, MobileNets on Imagenet-2012, and RNNs on WikiText-103
@@ -23,8 +23,8 @@ Summary: 初始化一个random sparse network，每一次update的过程中对�
 ![image](https://user-images.githubusercontent.com/105667644/171729587-b72ab8b7-33d3-4289-8143-d58a9277cbc3.png)
 - Sparse Distribution $\mathbb{S}$
   - Uniform: 每一层的稀疏度与总稀疏度相等，需要保持第一个layer dense
-  - Erdos-Renyi: $s^l = 1-\frac{n^{l-1}+n^l}{n^{l-1}\*n^l}$, $n^l$表示第$l$层neruons数量
-  - ERK: 在ER的基础上引入kernel dimensions, number of parameters of the sparse convolutional layers are scaled proportional to $1-\frac{n^{l-1}+n^l+w^l+h^l}{n^{l-1}\*n^l\*w^l\*h^l}$, where $w^l$ and $h^l$ are the width and the height of the $l^{th}$ convolutional kernel
+  - Erdos-Renyi: $s^l = 1-\frac{n^{l-1}+n^l}{n^{l-1}*n^l}$, $n^l$表示第$l$层neruons数量
+  - ERK: 在ER的基础上引入kernel dimensions, number of parameters of the sparse convolutional layers are scaled proportional to $1-\frac{n^{l-1}+n^l+w^l+h^l}{n^{l-1}*n^l*w^l*h^l}$, where $w^l$ and $h^l$ are the width and the height of the $l^{th}$ convolutional kernel
 - Update Schedule
   - $\Delta T$: 每两次update之间的iterations数量
   - $T_{end}$: 结束update的iterations数量
@@ -33,5 +33,5 @@ Summary: 初始化一个random sparse network，每一次update的过程中对�
   $$
   f_{decay} = \frac{\alpha}{2}(1+\cos(\frac{t\pi}{T_{end}}))
   $$
-- Drop Crition: drop参数绝对值最小的top $K$个connections, $K=f_{decay}\*(1-s^l)N^l$
+- Drop Crition: drop参数绝对值最小的top $K$个connections, $K=f_{decay}*(1-s^l)N^l$
 - Grow Crition: (*Novelty*)在所有的未被保留下来的connections中，magnitude gradients绝对值最大的top $K$会被grow并参数初始化为0
