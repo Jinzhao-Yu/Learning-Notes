@@ -29,5 +29,9 @@ Summary: 初始化一个random sparse network，每一次update的过程中对�
   - $\Delta T$: 每两次update之间的iterations数量
   - $T_{end}$: 结束update的iterations数量
   - $\alpha$: initial fraction of connections updated
-  - $f_{decay}$: 每$\Delta T$次循环
-- 
+  - $f_{decay}$: 每$\Delta T$次循环执行一次函数，用于decay the fraction of updated connections
+  $$
+  f_{decay} = \frac{\alpha}{2}(1+\cos(\frac{t\pi}{T_{end}}))
+  $$
+- Drop Crition: drop参数绝对值最小的top $K$个connections, $K=f_{decay}\*(1-s^l)N^l$
+- Grow Crition: (*Novelty*)在所有的未被保留下来的connections中，magnitude gradients绝对值最大的top $K$会被grow并参数初始化为0
