@@ -15,6 +15,7 @@ parts:
       - file: Deep_Learning/Related_Papers/README.md
         sections:
         - file: Deep_Learning/Related_Papers/cSG-MCMC.md
+        - file: Deep_Learning/Related_Papers/RigL.md
   - caption: Quant Skills
     chapters:
       - file: Quant/README.md
