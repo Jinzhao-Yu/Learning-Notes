@@ -8,7 +8,9 @@ parts:
     chapters:
       - file: Data_structure/README.md
         sections:
-        - file: Data_structure/binary_search
+        - file: Data_structure/binary-search
+        - file: Data_structure/binary-search-trees
+        - file: Data_structure/Leetcode
   - caption: Deep Learning
     chapters:
       - file: Deep_Learning/Pytorch/README.md

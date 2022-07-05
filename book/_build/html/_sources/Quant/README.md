@@ -1,1 +1,0 @@
-# Quant Skills Intro
