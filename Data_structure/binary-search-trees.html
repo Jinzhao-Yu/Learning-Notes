@@ -1,0 +1,2463 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2 Binary Search Trees, Traversals and Balancing &#8212; Jinzhao&#39;s Learning Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Leetcode Solutions" href="Leetcode.html" />
+    <link rel="prev" title="1 Binary Search" href="binary-search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/ai-vs-ml-1200.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Jinzhao's Learning Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Jinzhao’s Mind Palance
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Structure
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Data Structure Intro
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="binary-search.html">
+     1 Binary Search
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2 Binary Search Trees, Traversals and Balancing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Leetcode.html">
+     Leetcode Solutions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Deep_Learning/Pytorch/README.html">
+   Pytorch Tutorial
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Pytorch/Pytorch-tutorial1.html">
+     Pytorch Tensor Tutorial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Deep_Learning/Related_Papers/README.html">
+   Related Papers
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Related_Papers/cSG-MCMC.html">
+     CYCLICAL STOCHASTIC GRADIENT MCMC FOR BAYESIAN DEEP LEARNING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Related_Papers/RigL.html">
+     Rigging the Lottery: Making All Tickets Winners
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Quant Skills
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Quant/README.html">
+   Quant Skills Intro
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Backup Template
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Data_structure/binary-search-trees.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Jinzhao-Yu/Learning-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Jinzhao-Yu/Learning-Notes/issues/new?title=Issue%20on%20page%20%2FData_structure/binary-search-trees.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/Jinzhao-Yu/Learning-Notes/edit/master/Data_structure/binary-search-trees.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Jinzhao-Yu/Learning-Notes/master?urlpath=tree/Data_structure/binary-search-trees.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-search">
+   2.1 Linear Search
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input">
+     2.1.1 Input
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     2.1.2 Output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complexity">
+     2.1.3 Complexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-tree">
+   2.2 Binary Tree
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#balanced-binary-search-trees">
+     2.2.1 Balanced Binary Search Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#traversing-a-binary-tree">
+     2.2.2 Traversing a Binary Tree 二叉树遍历
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#inorder-traversal">
+       2.2.2.1 Inorder traversal 中序遍历
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#preorder-traversal">
+       2.2.2.2 Preorder traversal 前序遍历
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#postorder-traveral">
+       2.2.2.3 Postorder traveral 后序遍历
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#height-of-a-binary-tree">
+     2.2.3 Height of a Binary Tree
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-search-tree-bst">
+   2.3 Binary Search Tree (BST)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-the-bst">
+     2.3.1 Check the BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#storing-key-value-pairs-using-bsts">
+     2.3.2 Storing Key-Value Pairs using BSTs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#insertion-into-bst">
+     2.3.3 Insertion into BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-a-node-in-bst">
+     2.3.4 Finding a Node in BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-a-value-in-a-bst">
+     2.3.5 Updating a value in a BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list-the-nodes">
+     2.3.6 List the nodes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#balanced-trees">
+   2.4 Balanced Trees
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#balanced-binary-trees">
+     2.4.1 Balanced Binary Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     2.4.2 Balanced Binary Search Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#balancing-an-unbalanced-bst">
+     2.4.3 Balancing an Unbalanced BST
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-python-friendly-treemap">
+   2.4 A Python-Friendly Treemap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#self-balancing-binary-trees-and-avl-trees">
+   2.5 Self-Balancing Binary Trees and AVL Trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary-and-exercises">
+   Summary and Exercises
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2 Binary Search Trees, Traversals and Balancing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-search">
+   2.1 Linear Search
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input">
+     2.1.1 Input
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     2.1.2 Output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complexity">
+     2.1.3 Complexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-tree">
+   2.2 Binary Tree
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#balanced-binary-search-trees">
+     2.2.1 Balanced Binary Search Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#traversing-a-binary-tree">
+     2.2.2 Traversing a Binary Tree 二叉树遍历
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#inorder-traversal">
+       2.2.2.1 Inorder traversal 中序遍历
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#preorder-traversal">
+       2.2.2.2 Preorder traversal 前序遍历
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#postorder-traveral">
+       2.2.2.3 Postorder traveral 后序遍历
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#height-of-a-binary-tree">
+     2.2.3 Height of a Binary Tree
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binary-search-tree-bst">
+   2.3 Binary Search Tree (BST)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-the-bst">
+     2.3.1 Check the BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#storing-key-value-pairs-using-bsts">
+     2.3.2 Storing Key-Value Pairs using BSTs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#insertion-into-bst">
+     2.3.3 Insertion into BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-a-node-in-bst">
+     2.3.4 Finding a Node in BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-a-value-in-a-bst">
+     2.3.5 Updating a value in a BST
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list-the-nodes">
+     2.3.6 List the nodes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#balanced-trees">
+   2.4 Balanced Trees
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#balanced-binary-trees">
+     2.4.1 Balanced Binary Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     2.4.2 Balanced Binary Search Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#balancing-an-unbalanced-bst">
+     2.4.3 Balancing an Unbalanced BST
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-python-friendly-treemap">
+   2.4 A Python-Friendly Treemap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#self-balancing-binary-trees-and-avl-trees">
+   2.5 Self-Balancing Binary Trees and AVL Trees
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary-and-exercises">
+   Summary and Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="binary-search-trees-traversals-and-balancing">
+<h1>2 Binary Search Trees, Traversals and Balancing<a class="headerlink" href="#binary-search-trees-traversals-and-balancing" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook, we’ll focus on solving the following problem:</p>
+<blockquote>
+<div><p><strong>QUESTION 1</strong>: As a senior backend engineer at Jovian, you are tasked with developing a fast in-memory data structure to manage profile information (username, name and email) for 100 million users. It should allow the following operations to be performed efficiently:</p>
+<ol class="simple">
+<li><p><strong>Insert</strong> the profile information for a new user.</p></li>
+<li><p><strong>Find</strong> the profile information of a user, given their username</p></li>
+<li><p><strong>Update</strong> the profile information of a user, given their usrname</p></li>
+<li><p><strong>List</strong> all the users of the platform, sorted by username</p></li>
+</ol>
+<p>You can assume that usernames are unique.</p>
+<p>We need to create a data structure which can store 100 million records and perform insertion, search, update and list operations efficiently.</p>
+</div></blockquote>
+<p>Along the way, we will also solve several other questions related to binary trees and binary search trees that are often asked in coding interviews and assessments.</p>
+<div class="section" id="linear-search">
+<h2>2.1 Linear Search<a class="headerlink" href="#linear-search" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="input">
+<h3>2.1.1 Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h3>
+<p>The key inputs to our data structure are user profiles, which contain the username, name and email of a user.</p>
+<p><strong>A Python <em>class</em> would be a great way to represent the information for a user. A class is a blueprint for creating <em>objects</em>. Everything in Python is an <em>object</em> belonging to some <em>class</em>.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        
+    <span class="k">def</span> <span class="nf">introduce_yourself</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guest_name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hi </span><span class="si">{}</span><span class="s2">, I&#39;m </span><span class="si">{}</span><span class="s2">, please contact me at </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">guest_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now create an object with some properties.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user1</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;john&#39;</span><span class="p">,</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;john@doe.com&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.User at 0x7fbb51083b50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s what’s happening above (conceptually):</p>
+<ul class="simple">
+<li><p>Python creates an empty object of the type user and stores in the variable <code class="docutils literal notranslate"><span class="pre">user1</span></code></p></li>
+<li><p>Python then invokes the function <code class="docutils literal notranslate"><span class="pre">User.___init__</span></code> with the arguments <code class="docutils literal notranslate"><span class="pre">user1</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;john&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;John</span> <span class="pre">Doe&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;john&#64;doe.com&quot;</span></code></p></li>
+<li><p>As the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function is executed, the properties <code class="docutils literal notranslate"><span class="pre">username</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">email</span></code> are set on the object <code class="docutils literal notranslate"><span class="pre">user1</span></code></p></li>
+</ul>
+<p>We can access the properties of the object using the <code class="docutils literal notranslate"><span class="pre">.</span></code> notation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user1</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">user1</span><span class="o">.</span><span class="n">username</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;John Doe&#39;, &#39;john@doe.com&#39;, &#39;john&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also define custom methods inside a class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user1</span><span class="o">.</span><span class="n">introduce_yourself</span><span class="p">(</span><span class="s1">&#39;David&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hi David, I&#39;m John Doe, please contact me at john@doe.com!
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we try to invoke the method <code class="docutils literal notranslate"><span class="pre">user3.introduce_yourself</span></code>, the object <code class="docutils literal notranslate"><span class="pre">user3</span></code> is automatically passed as the first argument <code class="docutils literal notranslate"><span class="pre">self</span></code>. Indeed, the following statement is equivalent to the above statement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">User</span><span class="o">.</span><span class="n">introduce_yourself</span><span class="p">(</span><span class="n">user1</span><span class="p">,</span> <span class="s1">&#39;David&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hi David, I&#39;m John Doe, please contact me at john@doe.com!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we’ll define a couple of helper methods to display user objects nicely within Jupyter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;User(username=&#39;</span><span class="si">{}</span><span class="s2">&#39;, name=&#39;</span><span class="si">{}</span><span class="s2">&#39;, email=&#39;</span><span class="si">{}</span><span class="s2">&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>The difference between <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> and <code class="docutils literal notranslate"><span class="pre">__str__</span></code></strong>:<br />
+<code class="docutils literal notranslate"><span class="pre">__repr__</span></code> compute the “official” string representation of an object (a representation that has all information about the object)<br />
+<code class="docutils literal notranslate"><span class="pre">__str__</span></code> is used to compute the “informal” string representation of an object (a representation that is useful for printing the object)</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+  
+<span class="c1"># Prints readable format for date-time object</span>
+<span class="nb">print</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">today</span><span class="p">))</span>
+  
+<span class="c1"># prints the official format of date-time object</span>
+<span class="nb">print</span> <span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">today</span><span class="p">))</span>     
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-07-05 12:49:22.901734
+datetime.datetime(2022, 7, 5, 12, 49, 22, 901734)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user2</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;jane&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;jane@doe.com&#39;</span><span class="p">)</span>
+<span class="n">user2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>User(username=&#39;jane&#39;, name=&#39;Jane Doe&#39;, email=&#39;jane@doe.com&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create some sample user profiles that we can use to test our functions once we implement them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aakash</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;aakash&#39;</span><span class="p">,</span> <span class="s1">&#39;Aakash Rai&#39;</span><span class="p">,</span> <span class="s1">&#39;aakash@example.com&#39;</span><span class="p">)</span>
+<span class="n">biraj</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;biraj&#39;</span><span class="p">,</span> <span class="s1">&#39;Biraj Das&#39;</span><span class="p">,</span> <span class="s1">&#39;biraj@example.com&#39;</span><span class="p">)</span>
+<span class="n">hemanth</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;hemanth&#39;</span><span class="p">,</span> <span class="s1">&#39;Hemanth Jain&#39;</span><span class="p">,</span> <span class="s1">&#39;hemanth@example.com&#39;</span><span class="p">)</span>
+<span class="n">jadhesh</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;jadhesh&#39;</span><span class="p">,</span> <span class="s1">&#39;Jadhesh Verma&#39;</span><span class="p">,</span> <span class="s1">&#39;jadhesh@example.com&#39;</span><span class="p">)</span>
+<span class="n">siddhant</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;siddhant&#39;</span><span class="p">,</span> <span class="s1">&#39;Siddhant Sinha&#39;</span><span class="p">,</span> <span class="s1">&#39;siddhant@example.com&#39;</span><span class="p">)</span>
+<span class="n">sonaksh</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;sonaksh&#39;</span><span class="p">,</span> <span class="s1">&#39;Sonaksh Kumar&#39;</span><span class="p">,</span> <span class="s1">&#39;sonaksh@example.com&#39;</span><span class="p">)</span>
+<span class="n">vishal</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;vishal&#39;</span><span class="p">,</span> <span class="s1">&#39;Vishal Goel&#39;</span><span class="p">,</span> <span class="s1">&#39;vishal@example.com&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">users</span> <span class="o">=</span> <span class="p">[</span><span class="n">aakash</span><span class="p">,</span> <span class="n">biraj</span><span class="p">,</span> <span class="n">hemanth</span><span class="p">,</span> <span class="n">jadhesh</span><span class="p">,</span> <span class="n">siddhant</span><span class="p">,</span> <span class="n">sonaksh</span><span class="p">,</span> <span class="n">vishal</span><span class="p">]</span>
+<span class="n">users</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[User(username=&#39;aakash&#39;, name=&#39;Aakash Rai&#39;, email=&#39;aakash@example.com&#39;),
+ User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;),
+ User(username=&#39;hemanth&#39;, name=&#39;Hemanth Jain&#39;, email=&#39;hemanth@example.com&#39;),
+ User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;),
+ User(username=&#39;siddhant&#39;, name=&#39;Siddhant Sinha&#39;, email=&#39;siddhant@example.com&#39;),
+ User(username=&#39;sonaksh&#39;, name=&#39;Sonaksh Kumar&#39;, email=&#39;sonaksh@example.com&#39;),
+ User(username=&#39;vishal&#39;, name=&#39;Vishal Goel&#39;, email=&#39;vishal@example.com&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="output">
+<h3>2.1.2 Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<p>We can also express our desired data structure as a Python class <code class="docutils literal notranslate"><span class="pre">UserDatabase</span></code> with four methods: <code class="docutils literal notranslate"><span class="pre">insert</span></code>, <code class="docutils literal notranslate"><span class="pre">find</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code> and <code class="docutils literal notranslate"><span class="pre">list_all</span></code>.</p>
+<p>Here’s a simple and easy solution to the problem: we store the <code class="docutils literal notranslate"><span class="pre">User</span></code> objects in a list sorted by usernames.</p>
+<p>The various functions can be implemented as follows:</p>
+<ol class="simple">
+<li><p><strong>Insert</strong>: Loop through the list and add the new user at a position that keeps the list sorted.</p></li>
+<li><p><strong>Find</strong>: Loop through the list and find the user object with the username matching the query.</p></li>
+<li><p><strong>Update</strong>: Loop through the list, find the user object matching the query and update the details</p></li>
+<li><p><strong>List</strong>: Return the list of user objects.</p></li>
+</ol>
+<p>We can use the fact usernames, which are are strings can be compared using the <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">==</span></code> operators in Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserDatabase</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">username</span> <span class="o">&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">user</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+        <span class="n">target</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span>
+    
+    <span class="k">def</span> <span class="nf">list_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can create a new database of users by <em>instantiating</em> and object of the <code class="docutils literal notranslate"><span class="pre">UserDatabase</span></code> class, and use these functions to change the database.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">database</span> <span class="o">=</span> <span class="n">UserDatabase</span><span class="p">()</span>
+<span class="c1"># insert some users into database</span>
+<span class="n">database</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">hemanth</span><span class="p">)</span>
+<span class="n">database</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">aakash</span><span class="p">)</span>
+<span class="n">database</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">siddhant</span><span class="p">)</span>
+<span class="n">database</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">biraj</span><span class="p">)</span>
+<span class="c1"># find the target user</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;siddhant&#39;</span><span class="p">)</span>
+<span class="n">user</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>User(username=&#39;siddhant&#39;, name=&#39;Siddhant Sinha&#39;, email=&#39;siddhant@example.com&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># update the user information</span>
+<span class="n">database</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">User</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;siddhant&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Siddhant U&#39;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">&#39;siddhantu@example.com&#39;</span><span class="p">))</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;siddhant&#39;</span><span class="p">)</span>
+<span class="n">user</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list all users in database</span>
+<span class="n">database</span><span class="o">.</span><span class="n">list_all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[User(username=&#39;aakash&#39;, name=&#39;Aakash Rai&#39;, email=&#39;aakash@example.com&#39;),
+ User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;),
+ User(username=&#39;hemanth&#39;, name=&#39;Hemanth Jain&#39;, email=&#39;hemanth@example.com&#39;),
+ User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="complexity">
+<h3>2.1.3 Complexity<a class="headerlink" href="#complexity" title="Permalink to this headline">¶</a></h3>
+<p>The operations <code class="docutils literal notranslate"><span class="pre">insert</span></code>, <code class="docutils literal notranslate"><span class="pre">find</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code> involves iterating over a list of users, in the worst case, they may take up to <code class="docutils literal notranslate"><span class="pre">N</span></code> iterations to return a result, where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the total number of users. <code class="docutils literal notranslate"><span class="pre">list_all</span></code> however, simply returns the existing internal list of users.</p>
+<p>Thus, the time complexities of the various operations are:</p>
+<ol class="simple">
+<li><p>Insert: <strong>O(N)</strong></p></li>
+<li><p>Find: <strong>O(N)</strong></p></li>
+<li><p>Update: <strong>O(N)</strong></p></li>
+<li><p>List: <strong>O(1)</strong></p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="binary-tree">
+<h2>2.2 Binary Tree<a class="headerlink" href="#binary-tree" title="Permalink to this headline">¶</a></h2>
+<p>We can limit the number of iterations required for common operations like find, insert and update by organizing our data in the following structure, called a <strong>binary tree</strong>:</p>
+<img src="https://i.imgur.com/Mqef5b3.png" width="520">
+<p>It’s called a tree because it vaguely like an inverted tree trunk with branches.</p>
+<ul class="simple">
+<li><p>The word “binary” indicates that each “node” in the tree can have at most 2 children (left or right).</p></li>
+<li><p>Nodes can have 0, 1 or 2 children. Nodes that do not have any children are sometimes also called “leaves”.</p></li>
+<li><p>The single node at the top is called the “root” node, and it typically where operations like search, insertion etc. begin.</p></li>
+</ul>
+<div class="section" id="balanced-binary-search-trees">
+<h3>2.2.1 Balanced Binary Search Trees<a class="headerlink" href="#balanced-binary-search-trees" title="Permalink to this headline">¶</a></h3>
+<p>For our use case, we require the binary tree to have some additional properties:</p>
+<ol class="simple">
+<li><p><strong>Keys and Values</strong>: Each node of the tree stores a key (a username) and a value (a <code class="docutils literal notranslate"><span class="pre">User</span></code> object). Only keys are shown in the picture above for brevity. A binary tree where nodes have both a key and a value is often referred to as a <strong>map</strong> or <strong>treemap</strong> (because it maps keys to values).</p></li>
+<li><p><strong>Binary Search Tree</strong>: The <em>left subtree</em> of any node only contains nodes with keys that are lexicographically smaller than the node’s key, and the <em>right subtree</em> of any node only contains nodes with keys that lexicographically larger than the node’s key. A tree that satisfies this property is called a <strong>binary search trees</strong>, and it’s easy to locate a specific key by traversing a single path down from the root note.</p></li>
+<li><p><strong>Balanced Tree</strong>: The tree is <strong>balanced</strong> i.e. it does not skew too heavily to one side or the other. The left and right subtrees of any node shouldn’t differ in height/depth by more than 1 level.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>QUESTION 2</strong>: Implement a binary tree using Python, and show its usage with some examples.</p>
+</div></blockquote>
+<p>To begin, we’ll create simple binary tree (without any of the additional properties) containing numbers as keys within nodes. Here’s an example:</p>
+<img src="https://i.imgur.com/hg2ZG5h.png" width="240">
+<p>Here’s a simple class representing a node within a binary tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create objects representing each node of the above tree, and combine them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node0</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">node1</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">node2</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">node0</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">node1</span>
+<span class="n">node0</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">node2</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">node0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">key</span><span class="p">,</span><span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">key</span><span class="p">,</span><span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">key</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 4, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>When the tree is complex like belo, it’s a bit inconvenient to create a tree by manually connecting all the nodes. Let’s write a helper function which can convert a tuple with the structure <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">left_subtree,</span> <span class="pre">key,</span> <span class="pre">right_subtree)</span></code> (where <code class="docutils literal notranslate"><span class="pre">left_subtree</span></code> and <code class="docutils literal notranslate"><span class="pre">right_subtree</span></code> are themselves tuples) into binary tree.<br />
+<img src="https://i.imgur.com/d7djJAf.png" width="540"></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parse_tuple</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;convert a tuple into a binary tree&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">parse_tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">parse_tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">node</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">parse_tuple</span></code> creates a new root node when a tuple of size 3 as an the input. Interestingly, to create the left and right subtrees for the node, the <code class="docutils literal notranslate"><span class="pre">parse_tuple</span></code> function invokes itself. This technique is called <em>recursion</em>. The chain of <em>recursive</em> calls ends when <code class="docutils literal notranslate"><span class="pre">parse_tuple</span></code> encounters a number or <code class="docutils literal notranslate"><span class="pre">None</span></code> as input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_tuple</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)))</span>
+<span class="n">tree2</span> <span class="o">=</span> <span class="n">parse_tuple</span><span class="p">(</span><span class="n">tree_tuple</span><span class="p">)</span>
+<span class="n">tree2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.TreeNode at 0x7fbb610d8130&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree2</span><span class="o">.</span><span class="n">key</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree2</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree2</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">key</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree2</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree2</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">tree2</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree2</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">key</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, None, 3, 7)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree2</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree2</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree2</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">key</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4, 6, 8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Define a function <code class="docutils literal notranslate"><span class="pre">tree_to_tuple</span></code> that converts a binary tree into a tuple representing the same tree. E.g. <code class="docutils literal notranslate"><span class="pre">tree_to_tuple</span></code> converts the tree created above to the tuple <code class="docutils literal notranslate"><span class="pre">((1,</span> <span class="pre">3,</span> <span class="pre">None),</span> <span class="pre">2,</span> <span class="pre">((None,</span> <span class="pre">3,</span> <span class="pre">4),</span> <span class="pre">5,</span> <span class="pre">(6,</span> <span class="pre">7,</span> <span class="pre">8)))</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tree_to_tuple</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;convert a tree into a tuple&#39;&#39;&#39;</span>
+    <span class="n">tree_tuple</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">tree_to_tuple</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">),</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree_to_tuple</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_to_tuple</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create another helper function <code class="docutils literal notranslate"><span class="pre">display_keys</span></code> to display all the keys in a tree-like structure for easier visualization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_keys</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;display all keys of a node in a tree-like structrure&#39;&#39;&#39;</span>
+    <span class="c1"># if the node is empty</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="o">*</span><span class="n">level</span> <span class="o">+</span> <span class="s1">&#39;∅&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="c1"># if the node is a leaf</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="o">*</span><span class="n">level</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">return</span>
+    <span class="c1"># if the node has children</span>
+    <span class="n">display_keys</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="o">*</span><span class="n">level</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+    <span class="n">display_keys</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_keys</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="s1">&#39;  &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      8
+    7
+      6
+  5
+      4
+    3
+      ∅
+2
+    ∅
+  3
+    1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="traversing-a-binary-tree">
+<h3>2.2.2 Traversing a Binary Tree 二叉树遍历<a class="headerlink" href="#traversing-a-binary-tree" title="Permalink to this headline">¶</a></h3>
+<p>A <em>traversal</em> refers to the process of visiting each node of a tree exactly once. <em>Visiting a node</em> generally refers to adding the node’s key to a list. There are three ways to traverse a binary tree and return the list of visited keys:</p>
+<div class="section" id="inorder-traversal">
+<h4>2.2.2.1 Inorder traversal 中序遍历<a class="headerlink" href="#inorder-traversal" title="Permalink to this headline">¶</a></h4>
+<p><strong>左子树-根-右子树</strong></p>
+<ol class="simple">
+<li><p>Traverse the left subtree recursively inorder.</p></li>
+<li><p>Traverse the current node.</p></li>
+<li><p>Traverse the right subtree recursively inorder.</p></li>
+</ol>
+<img src="https://i.imgur.com/KCXpMA9.png" width="540">
+</div>
+<div class="section" id="preorder-traversal">
+<h4>2.2.2.2 Preorder traversal 前序遍历<a class="headerlink" href="#preorder-traversal" title="Permalink to this headline">¶</a></h4>
+<p><strong>根-左子树-右子树</strong></p>
+<ol class="simple">
+<li><p>Traverse the current node.</p></li>
+<li><p>Traverse the left subtree recursively preorder.</p></li>
+<li><p>Traverse the right subtree recursively preorder.</p></li>
+</ol>
+<img src="https://i.imgur.com/2xrMUWP.png" width="540">
+</div>
+<div class="section" id="postorder-traveral">
+<h4>2.2.2.3 Postorder traveral 后序遍历<a class="headerlink" href="#postorder-traveral" title="Permalink to this headline">¶</a></h4>
+<p><strong>左子树-右子树-根</strong></p>
+<ol class="simple">
+<li><p>Traverse the left subtree recursively postorder.</p></li>
+<li><p>Traverse the right subtree recursively postorder.</p></li>
+<li><p>Traverse the current node.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">traverse_inorder</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">traverse_inorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> 
+            <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">+</span>
+            <span class="n">traverse_inorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traverse_inorder</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 3, 2, 3, 4, 5, 6, 7, 8]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">traverse_preorder</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="p">([</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">+</span>
+            <span class="n">traverse_preorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span>
+            <span class="n">traverse_preorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traverse_preorder</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 3, 1, 5, 3, 4, 7, 6, 8]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">traverse_postorder</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">traverse_postorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span>
+            <span class="n">traverse_postorder</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="o">+</span>
+            <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traverse_postorder</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 3, 4, 3, 6, 8, 7, 5, 2]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="height-of-a-binary-tree">
+<h3>2.2.3 Height of a Binary Tree<a class="headerlink" href="#height-of-a-binary-tree" title="Permalink to this headline">¶</a></h3>
+<p>The number of levels in a tree is called its height. As you can tell from the picture above, each level of a tree contains twice as many nodes as the previous level.</p>
+<p>For a tree of height <code class="docutils literal notranslate"><span class="pre">k</span></code>, here’s a list of the number of nodes at each level:</p>
+<p>Level 0: <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>Level 1: <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p>Level 2: <code class="docutils literal notranslate"><span class="pre">4</span></code> i.e. <code class="docutils literal notranslate"><span class="pre">2^2</span></code></p>
+<p>Level 3: <code class="docutils literal notranslate"><span class="pre">8</span></code> i.e. <code class="docutils literal notranslate"><span class="pre">2^3</span></code></p>
+<p>…</p>
+<p>Level k-1: <code class="docutils literal notranslate"><span class="pre">2^(k-1)</span></code></p>
+<p>If the total number of nodes in the tree is <code class="docutils literal notranslate"><span class="pre">N</span></code>, then it follows that</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can simplify this equation by adding <code class="docutils literal notranslate"><span class="pre">1</span></code> on each side:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">N</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">N</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">3</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="o">...</span>
+
+<span class="n">N</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="n">k</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">log</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> 
+
+</pre></div>
+</div>
+<p>Thus, to store <code class="docutils literal notranslate"><span class="pre">N</span></code> records we require a balanced binary search tree (BST) of height no larger than <code class="docutils literal notranslate"><span class="pre">log(N)</span> <span class="pre">+</span> <span class="pre">1</span></code>. This is a very useful property, in combination with the fact that nodes are arranged in a way that makes it easy to find a specific key by following a single path down from the root.</p>
+<p>As we’ll see soon, the <code class="docutils literal notranslate"><span class="pre">insert</span></code>, <code class="docutils literal notranslate"><span class="pre">find</span></code> and <code class="docutils literal notranslate"><span class="pre">update</span></code> operations in a balanced BST have time complexity <code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">N)</span></code> since they all involve traversing a single path down from the root of the tree.</p>
+<p>The <em>height/depth</em> of a binary tree is defined as the length of the longest path from its root node to a leaf. It can be computed recursively, as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tree_height</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">+</span><span class="nb">max</span><span class="p">(</span><span class="n">tree_height</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">),</span> <span class="n">tree_height</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute the height of this tree:</p>
+<img src="https://i.imgur.com/d7djJAf.png" width="540"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_height</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a function to count the number of nodes in a binary tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tree_size</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">tree_size</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">tree_size</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_size</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a final step, let’s compile all the functions we’ve written so far as methods withing the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> class itself. Encapsulation of data and functionality within the same class is a good programming practice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TreeNode</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    
+    <span class="k">def</span> <span class="nf">tree_height</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">+</span><span class="nb">max</span><span class="p">(</span><span class="n">tree_height</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">),</span> <span class="n">tree_height</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">tree_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">tree_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">tree_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">traverse_inorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">traverse_inorder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> 
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">+</span>
+                <span class="n">traverse_inorder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">display_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;display all keys of a node in a tree-like structrure&#39;&#39;&#39;</span>
+        <span class="c1"># if the node is empty</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="o">*</span><span class="n">level</span> <span class="o">+</span> <span class="s1">&#39;∅&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="c1"># if the node is a leaf</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="o">*</span><span class="n">level</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="c1"># if the node has children</span>
+        <span class="n">display_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">space</span><span class="o">*</span><span class="n">level</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+        <span class="n">display_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  
+    
+    <span class="k">def</span> <span class="nf">tree_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;convert a tree into a tuple&#39;&#39;&#39;</span>
+        <span class="n">tree_tuple</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">tree_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree_to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;BinaryTree &lt;</span><span class="si">{}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_to_tuple</span><span class="p">())</span>
+    
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;BinaryTree &lt;</span><span class="si">{}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_to_tuple</span><span class="p">())</span>
+    
+    <span class="nd">@staticmethod</span>    
+    <span class="k">def</span> <span class="nf">parse_tuple</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;convert a tuple into a binary tree&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">parse_tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">parse_tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try out the various methods defined above for this tree:</p>
+<img src="https://i.imgur.com/d7djJAf.png" width="540"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_tuple</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="o">.</span><span class="n">parse_tuple</span><span class="p">(</span><span class="n">tree_tuple</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BinaryTree &lt;((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">display_keys</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      8
+    7
+      6
+  5
+      4
+    3
+      ∅
+2
+    ∅
+  3
+    1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">tree_height</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">tree_size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">traverse_inorder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 3, 2, 3, 4, 5, 6, 7, 8]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span><span class="o">.</span><span class="n">tree_to_tuple</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="binary-search-tree-bst">
+<h2>2.3 Binary Search Tree (BST)<a class="headerlink" href="#binary-search-tree-bst" title="Permalink to this headline">¶</a></h2>
+<p>A binary search tree or BST is a binary tree that satisfies the following conditions:</p>
+<ol class="simple">
+<li><p><strong>The left subtree of any node only contains nodes with keys less than the node’s key</strong></p></li>
+<li><p><strong>The right subtree of any node only contains nodes with keys greater than the node’s key</strong></p></li>
+</ol>
+<div class="section" id="check-the-bst">
+<h3>2.3.1 Check the BST<a class="headerlink" href="#check-the-bst" title="Permalink to this headline">¶</a></h3>
+<p>It follows from the above conditions that every subtree of a binary search tree must also be a binary search tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check if a binary tree is a binary search tree (BST) and find the max and min key</span>
+<span class="k">def</span> <span class="nf">remove_none</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">is_bst</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;check if a binary tree is BST and return max&amp;min keys&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    
+    <span class="n">is_bst_l</span><span class="p">,</span> <span class="n">min_l</span><span class="p">,</span> <span class="n">max_l</span> <span class="o">=</span> <span class="n">is_bst</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+    <span class="n">is_bst_r</span><span class="p">,</span> <span class="n">min_r</span><span class="p">,</span> <span class="n">max_r</span> <span class="o">=</span> <span class="n">is_bst</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+    
+    <span class="n">is_bst_node</span> <span class="o">=</span> <span class="p">(</span><span class="n">is_bst_l</span> <span class="ow">and</span> <span class="n">is_bst_r</span> <span class="ow">and</span> 
+                  <span class="p">(</span><span class="n">max_l</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">max_l</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">)</span> <span class="ow">and</span> 
+                  <span class="p">(</span><span class="n">min_r</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">min_r</span> <span class="o">&gt;</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+    
+    <span class="n">min_key</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">remove_none</span><span class="p">([</span><span class="n">min_l</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">min_r</span><span class="p">]))</span>
+    <span class="n">max_key</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">remove_none</span><span class="p">([</span><span class="n">max_l</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">max_r</span><span class="p">]))</span>
+        
+    <span class="k">return</span> <span class="n">is_bst_node</span><span class="p">,</span> <span class="n">min_key</span><span class="p">,</span> <span class="n">max_key</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following tree is not a BST (because a node with the key 3 appears in the left subtree of a node with the key 2):</p>
+<img src="https://i.imgur.com/d7djJAf.png" width="540">
+<p>Let’s verify this using <code class="docutils literal notranslate"><span class="pre">is_bst</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_bst</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(False, 1, 8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>On the other hand, the following tree is a BST:</p>
+<img src="https://i.imgur.com/JZeF9ix.png" width="520">
+<p>Let’s create this tree and verify that it is a BST. Note that the <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code> class also supports using strings as keys, as strings support the comparison operators <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> too.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree1</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="o">.</span><span class="n">parse_tuple</span><span class="p">(((</span><span class="s1">&#39;aakash&#39;</span><span class="p">,</span> <span class="s1">&#39;biraj&#39;</span><span class="p">,</span> <span class="s1">&#39;hemanth&#39;</span><span class="p">)</span>  <span class="p">,</span> <span class="s1">&#39;jadhesh&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;siddhant&#39;</span><span class="p">,</span> <span class="s1">&#39;sonaksh&#39;</span><span class="p">,</span> <span class="s1">&#39;vishal&#39;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree1</span><span class="o">.</span><span class="n">display_keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>		vishal
+	sonaksh
+		siddhant
+jadhesh
+		hemanth
+	biraj
+		aakash
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_bst</span><span class="p">(</span><span class="n">tree1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, &#39;aakash&#39;, &#39;vishal&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="storing-key-value-pairs-using-bsts">
+<h3>2.3.2 Storing Key-Value Pairs using BSTs<a class="headerlink" href="#storing-key-value-pairs-using-bsts" title="Permalink to this headline">¶</a></h3>
+<p>Recall that we need to store user objects with each key in our BST. Let’s define new class <code class="docutils literal notranslate"><span class="pre">BSTNode</span></code> to represent the nodes of of our tree. Apart from having properties <code class="docutils literal notranslate"><span class="pre">key</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span></code> and <code class="docutils literal notranslate"><span class="pre">right</span></code>, we’ll also store a <code class="docutils literal notranslate"><span class="pre">value</span></code> and pointer to the parent node (for easier upward traversal).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BSTNode</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try to recreate this BST with usernames as keys and user objects as values:</p>
+<img src="https://i.imgur.com/JZeF9ix.png" width="520"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Level 0</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">jadhesh</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">jadhesh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View Level 0</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;jadhesh&#39;,
+ User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Level 1</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">biraj</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">biraj</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">tree</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">sonaksh</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">sonaksh</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">tree</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View Level 1</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;biraj&#39;,
+ User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;),
+ &#39;sonaksh&#39;,
+ User(username=&#39;sonaksh&#39;, name=&#39;Sonaksh Kumar&#39;, email=&#39;sonaksh@example.com&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Add the next layer of nodes to the tree and verify that they were added properly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Level 2</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">aakash</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">aakash</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">left</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">hemanth</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">hemanth</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">left</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">siddhant</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">siddhant</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">right</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">vishal</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">vishal</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">right</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the same <code class="docutils literal notranslate"><span class="pre">display_keys</span></code> function we defined earlier to visualize our tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_keys</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>		vishal
+	sonaksh
+		siddhant
+jadhesh
+		hemanth
+	biraj
+		aakash
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="insertion-into-bst">
+<h3>2.3.3 Insertion into BST<a class="headerlink" href="#insertion-into-bst" title="Permalink to this headline">¶</a></h3>
+<p>We use the BST-property to perform insertion efficiently:</p>
+<ol class="simple">
+<li><p>Starting from the root node, we compare the key to be inserted with the current node’s key</p></li>
+<li><p>If the key is smaller, we recursively insert it in the left subtree (if it exists) or attach it as as the left child if no left subtree exists.</p></li>
+<li><p>If the key is larger, we recursively insert it in the right subtree (if it exists) or attach it as as the right child if no right subtree exists.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">node</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">node</span>
+    <span class="k">return</span> <span class="n">node</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s use this to recreate our tree.</p>
+<img src="https://i.imgur.com/JZeF9ix.png" width="520">
+<p>To create the first node, we can use the <code class="docutils literal notranslate"><span class="pre">insert</span></code> function with <code class="docutils literal notranslate"><span class="pre">None</span></code> as the target tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">jadhesh</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">jadhesh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The remaining nodes can now be inserted into <code class="docutils literal notranslate"><span class="pre">tree</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">biraj</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">biraj</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">sonaksh</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">sonaksh</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">aakash</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">aakash</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">hemanth</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">hemanth</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">siddhant</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">siddhant</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">vishal</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">siddhant</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.BSTNode at 0x7fbb517a5f10&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_keys</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>		vishal
+	sonaksh
+		siddhant
+jadhesh
+		hemanth
+	biraj
+		aakash
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note, however, that the order of insertion of nodes change the structure of the resulting tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree2</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">aakash</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">aakash</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">biraj</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">biraj</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">hemanth</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">hemanth</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">jadhesh</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">jadhesh</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">siddhant</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">siddhant</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">sonaksh</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">sonaksh</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">tree2</span><span class="p">,</span> <span class="n">vishal</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">vishal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.BSTNode at 0x7fbb517a5d30&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_keys</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>						vishal
+					sonaksh
+						∅
+				siddhant
+					∅
+			jadhesh
+				∅
+		hemanth
+			∅
+	biraj
+		∅
+aakash
+	∅
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can you see why the tree created above is skewed/unbalanced?</p>
+<img src="https://i.imgur.com/lP5Thct.png" width="520">
+<p>Skewed/unbalanced BSTs are problematic because the height of such trees often ceases to logarithmic compared to the number of nodes in the tree. For instance the above tree has 7 nodes and height 7.</p>
+<p><strong>The length of the path traversed by <code class="docutils literal notranslate"><span class="pre">insert</span></code> is equal to the height of the tree (in the worst case). It follows that if the tree is balanced, the time complexity of insertion is <code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">N)</span></code> otherwise it is <code class="docutils literal notranslate"><span class="pre">O(N)</span></code>.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_height</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="finding-a-node-in-bst">
+<h3>2.3.4 Finding a Node in BST<a class="headerlink" href="#finding-a-node-in-bst" title="Permalink to this headline">¶</a></h3>
+<p>We can follow a recursive strategy similar to insertion to find the node with a given key within a BST.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">node</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<img src="https://i.imgur.com/dzDszlw.png" width="520"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="s1">&#39;hemanth&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;hemanth&#39;,
+ User(username=&#39;hemanth&#39;, name=&#39;Hemanth Jain&#39;, email=&#39;hemanth@example.com&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>The the length of the path followed by <code class="docutils literal notranslate"><span class="pre">find</span></code> is equal to the height of the tree (in the worst case). Thus it has a similar time complexity as <code class="docutils literal notranslate"><span class="pre">insert</span></code>.</p>
+</div>
+<div class="section" id="updating-a-value-in-a-bst">
+<h3>2.3.5 Updating a value in a BST<a class="headerlink" href="#updating-a-value-in-a-bst" title="Permalink to this headline">¶</a></h3>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">find</span></code> to locate the node to be updated, and simply update it’s value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">target</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="s1">&#39;hemanth&#39;</span><span class="p">,</span> <span class="n">User</span><span class="p">(</span><span class="s1">&#39;hemanth&#39;</span><span class="p">,</span> <span class="s1">&#39;Hemanth J&#39;</span><span class="p">,</span> <span class="s1">&#39;hemanthj@example.com&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="s1">&#39;hemanth&#39;</span><span class="p">)</span>
+<span class="n">node</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>User(username=&#39;hemanth&#39;, name=&#39;Hemanth J&#39;, email=&#39;hemanthj@example.com&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The value of the node was successfully updated. The time complexity of <code class="docutils literal notranslate"><span class="pre">update</span></code> is the same as that of <code class="docutils literal notranslate"><span class="pre">find</span></code>.</p>
+</div>
+<div class="section" id="list-the-nodes">
+<h3>2.3.6 List the nodes<a class="headerlink" href="#list-the-nodes" title="Permalink to this headline">¶</a></h3>
+<p>The nodes can be listed in sorted order by performing an inorder traversal of the BST.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">list_all</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">list_all</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="p">[(</span><span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span><span class="p">)]</span> <span class="o">+</span> <span class="n">list_all</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_all</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;aakash&#39;,
+  User(username=&#39;aakash&#39;, name=&#39;Aakash Rai&#39;, email=&#39;aakash@example.com&#39;)),
+ (&#39;biraj&#39;,
+  User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;)),
+ (&#39;hemanth&#39;,
+  User(username=&#39;hemanth&#39;, name=&#39;Hemanth J&#39;, email=&#39;hemanthj@example.com&#39;)),
+ (&#39;jadhesh&#39;,
+  User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;)),
+ (&#39;siddhant&#39;,
+  User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;)),
+ (&#39;sonaksh&#39;,
+  User(username=&#39;sonaksh&#39;, name=&#39;Sonaksh Kumar&#39;, email=&#39;sonaksh@example.com&#39;)),
+ (&#39;vishal&#39;,
+  User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;))]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The time complexity and space complexity of <code class="docutils literal notranslate"><span class="pre">list_all</span></code> are <strong>O(N) and O(1)</strong></p>
+</div>
+</div>
+<div class="section" id="balanced-trees">
+<h2>2.4 Balanced Trees<a class="headerlink" href="#balanced-trees" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="balanced-binary-trees">
+<h3>2.4.1 Balanced Binary Trees<a class="headerlink" href="#balanced-binary-trees" title="Permalink to this headline">¶</a></h3>
+<p>To check a binary tree is balanced, here’s a recursive strategy:</p>
+<ol class="simple">
+<li><p>Ensure that the left subtree is balanced.</p></li>
+<li><p>Ensure that the right subtree is balanced.</p></li>
+<li><p>Ensure that the difference between heights of left subtree and right subtree is not more than 1.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_balanced</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">balanced_l</span><span class="p">,</span> <span class="n">height_l</span> <span class="o">=</span> <span class="n">is_balanced</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+    <span class="n">balanced_r</span><span class="p">,</span> <span class="n">height_r</span> <span class="o">=</span> <span class="n">is_balanced</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+    <span class="n">balanced</span> <span class="o">=</span> <span class="n">balanced_l</span> <span class="ow">and</span> <span class="n">balanced_r</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">height_l</span> <span class="o">-</span> <span class="n">height_r</span><span class="p">)</span> <span class="o">&lt;=</span><span class="mi">1</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">height_l</span><span class="p">,</span> <span class="n">height_r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">balanced</span><span class="p">,</span> <span class="n">height</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following tree is balanced:</p>
+<img src="https://i.imgur.com/JZeF9ix.png" width="520"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_balanced</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following tree is not balanced:</p>
+<img src="https://i.imgur.com/lP5Thct.png" width="520"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">is_balanced</span><span class="p">(</span><span class="n">tree2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(False, 7)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>2.4.2 Balanced Binary Search Trees<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>QUESTION</strong>: Write a function to create a balanced BST from a sorted list/array of key-value pairs.</p>
+</div></blockquote>
+<p>We can use a recursive strategy here, turning the middle element of the list into the root, and recursively creating left and right subtrees.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_balanced_bst</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lo</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">hi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">lo</span> <span class="o">&gt;</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="n">BSTNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">make_balanced_bst</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">make_balanced_bst</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">root</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">]</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;aakash&#39;,
+  User(username=&#39;aakash&#39;, name=&#39;Aakash Rai&#39;, email=&#39;aakash@example.com&#39;)),
+ (&#39;biraj&#39;,
+  User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;)),
+ (&#39;hemanth&#39;,
+  User(username=&#39;hemanth&#39;, name=&#39;Hemanth Jain&#39;, email=&#39;hemanth@example.com&#39;)),
+ (&#39;jadhesh&#39;,
+  User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;)),
+ (&#39;siddhant&#39;,
+  User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;)),
+ (&#39;sonaksh&#39;,
+  User(username=&#39;sonaksh&#39;, name=&#39;Sonaksh Kumar&#39;, email=&#39;sonaksh@example.com&#39;)),
+ (&#39;vishal&#39;,
+  User(username=&#39;vishal&#39;, name=&#39;Vishal Goel&#39;, email=&#39;vishal@example.com&#39;))]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">make_balanced_bst</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_keys</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>		vishal
+	sonaksh
+		siddhant
+jadhesh
+		hemanth
+	biraj
+		aakash
+</pre></div>
+</div>
+</div>
+</div>
+<img src="https://i.imgur.com/JZeF9ix.png" width="520">
+<p>Recall that the same list of users, when inserted one-by-one resulted in a skewed tree.</p>
+</div>
+<div class="section" id="balancing-an-unbalanced-bst">
+<h3>2.4.3 Balancing an Unbalanced BST<a class="headerlink" href="#balancing-an-unbalanced-bst" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>QUESTION</strong> Write a function to balance an unbalanced binary search tree.</p>
+</div></blockquote>
+<p>We first perform an inorder traversal, then create a balanced BST using the function defined earlier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree3</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">username</span><span class="p">,</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">tree3</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">tree3</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_keys</span><span class="p">(</span><span class="n">tree3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>						vishal
+					sonaksh
+						∅
+				siddhant
+					∅
+			jadhesh
+				∅
+		hemanth
+			∅
+	biraj
+		∅
+aakash
+	∅
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">balance_bst</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">make_balanced_bst</span><span class="p">(</span><span class="n">list_all</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree4</span> <span class="o">=</span> <span class="n">balance_bst</span><span class="p">(</span><span class="n">tree3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_keys</span><span class="p">(</span><span class="n">tree4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>		vishal
+	sonaksh
+		siddhant
+jadhesh
+		hemanth
+	biraj
+		aakash
+</pre></div>
+</div>
+</div>
+</div>
+<p>After every insertion, we can balance the tree. This way the tree will remain balanced.</p>
+<p><strong>Complexity of the various operations in a balanced BST:</strong></p>
+<ul class="simple">
+<li><p>Insert - O(log N) + O(N) = O(N)</p></li>
+<li><p>Find - O(log N)</p></li>
+<li><p>Update - O(log N)</p></li>
+<li><p>List all - O(N)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="a-python-friendly-treemap">
+<h2>2.4 A Python-Friendly Treemap<a class="headerlink" href="#a-python-friendly-treemap" title="Permalink to this headline">¶</a></h2>
+<p>We are now ready to return to our original problem statement.</p>
+<blockquote>
+<div><p><strong>QUESTION 1</strong>: As a senior backend engineer at Jovian, you are tasked with developing a fast in-memory data structure to manage profile information (username, name and email) for 100 million users. It should allow the following operations to be performed efficiently:</p>
+<ol class="simple">
+<li><p><strong>Insert</strong> the profile information for a new user.</p></li>
+<li><p><strong>Find</strong> the profile information of a user, given their username</p></li>
+<li><p><strong>Update</strong> the profile information of a user, given their usrname</p></li>
+<li><p><strong>List</strong> all the users of the platform, sorted by username</p></li>
+</ol>
+<p>You can assume that usernames are unique.</p>
+</div></blockquote>
+<p>We can create a generic class <code class="docutils literal notranslate"><span class="pre">TreeMap</span></code> which supports all the operations specified in the original problem statement in a python-friendly manner.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TreeMap</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">balance_bst</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            
+        
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="n">node</span> <span class="k">else</span> <span class="kc">None</span>
+    
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">list_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tree_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">display_keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try using the <code class="docutils literal notranslate"><span class="pre">TreeMap</span></code> class below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">users</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[User(username=&#39;aakash&#39;, name=&#39;Aakash Rai&#39;, email=&#39;aakash@example.com&#39;),
+ User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;),
+ User(username=&#39;hemanth&#39;, name=&#39;Hemanth Jain&#39;, email=&#39;hemanth@example.com&#39;),
+ User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;),
+ User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;),
+ User(username=&#39;sonaksh&#39;, name=&#39;Sonaksh Kumar&#39;, email=&#39;sonaksh@example.com&#39;),
+ User(username=&#39;vishal&#39;, name=&#39;Vishal Goel&#39;, email=&#39;vishal@example.com&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span> <span class="o">=</span> <span class="n">TreeMap</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>∅
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;aakash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aakash</span>
+<span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;jadhesh&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">jadhesh</span>
+<span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;sonaksh&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sonaksh</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	sonaksh
+jadhesh
+	aakash
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;jadhesh&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">treemap</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;biraj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">biraj</span>
+<span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;hemanth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hemanth</span>
+<span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;siddhant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">siddhant</span>
+<span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;vishal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vishal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>		vishal
+	sonaksh
+		siddhant
+jadhesh
+		hemanth
+	biraj
+		aakash
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">treemap</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aakash User(username=&#39;aakash&#39;, name=&#39;Aakash Rai&#39;, email=&#39;aakash@example.com&#39;)
+biraj User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;)
+hemanth User(username=&#39;hemanth&#39;, name=&#39;Hemanth Jain&#39;, email=&#39;hemanth@example.com&#39;)
+jadhesh User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;)
+siddhant User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;)
+sonaksh User(username=&#39;sonaksh&#39;, name=&#39;Sonaksh Kumar&#39;, email=&#39;sonaksh@example.com&#39;)
+vishal User(username=&#39;vishal&#39;, name=&#39;Vishal Goel&#39;, email=&#39;vishal@example.com&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">treemap</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;aakash&#39;,
+  User(username=&#39;aakash&#39;, name=&#39;Aakash Rai&#39;, email=&#39;aakash@example.com&#39;)),
+ (&#39;biraj&#39;,
+  User(username=&#39;biraj&#39;, name=&#39;Biraj Das&#39;, email=&#39;biraj@example.com&#39;)),
+ (&#39;hemanth&#39;,
+  User(username=&#39;hemanth&#39;, name=&#39;Hemanth Jain&#39;, email=&#39;hemanth@example.com&#39;)),
+ (&#39;jadhesh&#39;,
+  User(username=&#39;jadhesh&#39;, name=&#39;Jadhesh Verma&#39;, email=&#39;jadhesh@example.com&#39;)),
+ (&#39;siddhant&#39;,
+  User(username=&#39;siddhant&#39;, name=&#39;Siddhant U&#39;, email=&#39;siddhantu@example.com&#39;)),
+ (&#39;sonaksh&#39;,
+  User(username=&#39;sonaksh&#39;, name=&#39;Sonaksh Kumar&#39;, email=&#39;sonaksh@example.com&#39;)),
+ (&#39;vishal&#39;,
+  User(username=&#39;vishal&#39;, name=&#39;Vishal Goel&#39;, email=&#39;vishal@example.com&#39;))]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;aakash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;aakash&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Aakash N S&#39;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">&#39;aakashns@example.com&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">treemap</span><span class="p">[</span><span class="s1">&#39;aakash&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>User(username=&#39;aakash&#39;, name=&#39;Aakash N S&#39;, email=&#39;aakashns@example.com&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="self-balancing-binary-trees-and-avl-trees">
+<h2>2.5 Self-Balancing Binary Trees and AVL Trees<a class="headerlink" href="#self-balancing-binary-trees-and-avl-trees" title="Permalink to this headline">¶</a></h2>
+<p>A <em>self-balancing binary tree</em> remains balanced after every insertion or deletion. Several decades of research has gone into creating self-balancing binary trees, and many approaches have been devised e.g. B-trees, Red Black Trees and  AVL (Adelson-Velsky Landis) trees.</p>
+<p>We’ll take a brief look at AVL trees. Self-balancing in AVL trees is achieved by tracking the <em>balance factor</em> (difference between the height of the left subtree and the right subtree) for each node and <em>rotating</em> unbalanced subtrees along the path of insertion/deletion to balance them.</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/f/fd/AVL_Tree_Example.gif" /></p>
+<p>In a balanced BST, the balance factor of each node is either 0, -1, or 1. When we perform an insertion, then the balance factor of certain nodes along the path of insertion may change to 2 or -2. Those nodes can be “rotated” one-by-one to bring the balance factor back to 1, 0 or -1.</p>
+<p>There are 4 different scenarios for balancing, two of which require a single rotation, while the others require 2 rotations:</p>
+<p><img alt="" src="https://s3.amazonaws.com/hr-challenge-images/0/1436854305-b167cc766c-AVL_Tree_Rebalancing.svg.png" /></p>
+<p>Source: <a class="reference external" href="https://www.hackerrank.com/challenges/self-balancing-tree/problem">HackerRank</a></p>
+<p>Since each rotation takes constant time, and at most <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">N</span></code> rotations may be required, this operation is far more efficient than creating a balanced binary tree from scratch, allowing insertion and deletion to be performed in <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(log</span> <span class="pre">N)</span></code> time. Here are some references for AVL Trees:</p>
+<ul class="simple">
+<li><p>Explanation of the various cases: <a class="reference external" href="https://youtu.be/jDM6_TnYIqE?t=482">https://youtu.be/jDM6_TnYIqE?t=482</a></p></li>
+<li><p>Implementation: <a class="reference external" href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">https://www.geeksforgeeks.org/avl-tree-set-1-insertion/</a></p></li>
+</ul>
+</div>
+<div class="section" id="summary-and-exercises">
+<h2>Summary and Exercises<a class="headerlink" href="#summary-and-exercises" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="https://i.imgur.com/lVqP63n.png" /></p>
+<p>Binary trees form the basis of many modern programming language features (e.g. maps in C++ and Java) and data storage systems (filesystem indexes, relational databases like MySQL). You might wonder if dictionaries in Python are also binary search trees. They’re not. They’re hash tables, which is a different but equally interesting and important data structure. We’ll explore hash tables in a future tutorial.</p>
+<p>We’ve covered a lot of ground this in this tutorial, including several common interview questions. Here are a few more problems you can try out:</p>
+<ol class="simple">
+<li><p>Implement rotations and self-balancing insertion</p></li>
+<li><p>Implement deletion of a node from a binary search tree</p></li>
+<li><p>Implement deletion of a node from a BST (with balancing)</p></li>
+<li><p>Find the lowest common ancestor of two nodes in a tree (Hint: Use the <code class="docutils literal notranslate"><span class="pre">parent</span></code> property)</p></li>
+<li><p>Find the next node in lexicographic order for a given node</p></li>
+<li><p>Given a number k, find the k-th node in a BST.</p></li>
+</ol>
+<p>Try more questions here:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://medium.com/techie-delight/binary-tree-interview-questions-and-practice-problems-439df7e5ea1f">https://medium.com/techie-delight/binary-tree-interview-questions-and-practice-problems-439df7e5ea1f</a></p></li>
+<li><p><a class="reference external" href="https://leetcode.com/tag/tree/">https://leetcode.com/tag/tree/</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Data_structure"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="binary-search.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">1 Binary Search</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Leetcode.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Leetcode Solutions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jinzhao Yu<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
