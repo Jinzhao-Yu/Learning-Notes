@@ -12,6 +12,7 @@ parts:
         - file: Data_structure/binary-search-trees
         - file: Data_structure/sort
         - file: Data_structure/dynamic-programming-problems
+        - file: Data_structure/graph-algorithms
         - file: Data_structure/Leetcode
   - caption: Deep Learning
     chapters:
