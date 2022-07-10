@@ -1,0 +1,1065 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5 Grpah Algorithms &#8212; Jinzhao&#39;s Learning Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Leetcode Solutions" href="Leetcode.html" />
+    <link rel="prev" title="4 Recursion and Dynamic Programming 递归 &amp; 动态规划" href="dynamic-programming-problems.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/ai-vs-ml-1200.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Jinzhao's Learning Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Jinzhao’s Mind Palance
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Structure
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Data Structure Intro
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="binary-search.html">
+     1 Binary Search
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="binary-search-trees.html">
+     2 Binary Search Trees, Traversals and Balancing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sort.html">
+     3 Merge Sort, Quicksort and Divide-and-Conquer Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dynamic-programming-problems.html">
+     4 Recursion and Dynamic Programming 递归 &amp; 动态规划
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5 Grpah Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Leetcode.html">
+     Leetcode Solutions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Deep_Learning/Pytorch/README.html">
+   Pytorch Tutorial
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Pytorch/Pytorch-tutorial1.html">
+     Pytorch Tensor Tutorial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Deep_Learning/Related_Papers/README.html">
+   Related Papers
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Related_Papers/cSG-MCMC.html">
+     CYCLICAL STOCHASTIC GRADIENT MCMC FOR BAYESIAN DEEP LEARNING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Related_Papers/RigL.html">
+     Rigging the Lottery: Making All Tickets Winners
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Quant Skills
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Quant/README.html">
+   Quant Skills Intro
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Backup Template
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Data_structure/graph-algorithms.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Jinzhao-Yu/Learning-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Jinzhao-Yu/Learning-Notes/issues/new?title=Issue%20on%20page%20%2FData_structure/graph-algorithms.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/Jinzhao-Yu/Learning-Notes/edit/master/Data_structure/graph-algorithms.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Jinzhao-Yu/Learning-Notes/master?urlpath=tree/Data_structure/graph-algorithms.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-data-structure">
+   5.1 Graph Data Structure
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adjacency-list-nodes">
+     5.1.1 Adjacency List 相邻nodes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adjacency-matrix">
+     5.1.2 Adjacency Matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weighted-directed-graph">
+     5.1.3 Weighted/Directed Graph
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-traversal">
+   5.2 Graph Traversal
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#breadth-first-search">
+     5.2.1 Breadth-first search 广度优先搜索
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#depth-first-search">
+     5.2.2 Depth-first Search 深度优先搜索
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Depth-first search
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparision-and-complexity">
+     5.2.3 Comparision and Complexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shortest-paths">
+   5.3 Shortest Paths
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>5 Grpah Algorithms</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-data-structure">
+   5.1 Graph Data Structure
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adjacency-list-nodes">
+     5.1.1 Adjacency List 相邻nodes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adjacency-matrix">
+     5.1.2 Adjacency Matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weighted-directed-graph">
+     5.1.3 Weighted/Directed Graph
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-traversal">
+   5.2 Graph Traversal
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#breadth-first-search">
+     5.2.1 Breadth-first search 广度优先搜索
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#depth-first-search">
+     5.2.2 Depth-first Search 深度优先搜索
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Depth-first search
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparision-and-complexity">
+     5.2.3 Comparision and Complexity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shortest-paths">
+   5.3 Shortest Paths
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="grpah-algorithms">
+<h1>5 Grpah Algorithms<a class="headerlink" href="#grpah-algorithms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="graph-data-structure">
+<h2>5.1 Graph Data Structure<a class="headerlink" href="#graph-data-structure" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="https://i.imgur.com/xkgMnwx.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">num_nodes</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 7)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="adjacency-list-nodes">
+<h3>5.1.1 Adjacency List 相邻nodes<a class="headerlink" href="#adjacency-list-nodes" title="Permalink to this headline">¶</a></h3>
+<p>实际上就是将edges以list形式存下来，用于后续的使用</p>
+<p><img alt="" src="https://i.imgur.com/rgMwkIW.png" /></p>
+<blockquote>
+<div><p><strong>Question</strong>: Create a class to represent a graph as an adjacency list in Python</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">=</span> <span class="n">num_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">neighbour</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">neighbour</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">)])</span>
+    
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph1</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+<span class="n">graph1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: [1, 4]
+
+1: [0, 2, 3, 4]
+
+2: [1, 3]
+
+3: [1, 2, 4]
+
+4: [0, 1, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Question</strong>: <br />
+Write a function to add an edge to a graph represented as an adjacency list. <br />
+Write a function to remove an edge from a graph represented as a adjacency list.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">new_edge</span><span class="p">):</span>
+    <span class="n">n1</span><span class="p">,</span><span class="n">n2</span> <span class="o">=</span> <span class="n">new_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+    <span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">graph</span>
+
+<span class="k">def</span> <span class="nf">remove_edge</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+    <span class="n">n1</span><span class="p">,</span><span class="n">n2</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+    <span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">graph</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add_edge</span><span class="p">(</span><span class="n">graph1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: [1, 4, 2]
+
+1: [0, 2, 3, 4]
+
+2: [1, 3, 0]
+
+3: [1, 2, 4]
+
+4: [0, 1, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">remove_edge</span><span class="p">(</span><span class="n">graph1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: [1, 4]
+
+1: [0, 2, 3, 4]
+
+2: [1, 3]
+
+3: [1, 2, 4]
+
+4: [0, 1, 3]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="adjacency-matrix">
+<h3>5.1.2 Adjacency Matrix<a class="headerlink" href="#adjacency-matrix" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="https://i.imgur.com/oswYKTW.png" /></p>
+<blockquote>
+<div><p><strong>Question</strong>: Represent a graph as an adjacency matrix in Python</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">=</span> <span class="n">num_nodes</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">num_nodes</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">n1</span><span class="p">][</span><span class="n">n2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">n2</span><span class="p">][</span><span class="n">n1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">neighbour</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">neighbour</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">)])</span>
+    
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph1</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+<span class="n">graph1</span><span class="o">.</span><span class="n">adj_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0, 1, 0, 0, 1],
+ [1, 0, 1, 1, 1],
+ [0, 1, 0, 1, 0],
+ [0, 1, 1, 0, 1],
+ [1, 1, 0, 1, 0]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="weighted-directed-graph">
+<h3>5.1.3 Weighted/Directed Graph<a class="headerlink" href="#weighted-directed-graph" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Weighted Graph:</p></li>
+</ul>
+<p><img alt="" src="https://i.imgur.com/wy7ZHRW.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graph with weights</span>
+<span class="n">num_nodes2</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">edges2</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> 
+          <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+
+<span class="n">num_nodes2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Directed Graph:</p></li>
+</ul>
+<img src="https://i.imgur.com/8AN7EUV.png" width="480"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_nodes3</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">edges3</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">num_nodes3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">weighted</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">directed</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span> <span class="o">=</span> <span class="n">num_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weighted</span> <span class="o">=</span> <span class="n">weighted</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directed</span> <span class="o">=</span> <span class="n">directed</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">weighted</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">directed</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">num_nodes</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">n1</span><span class="p">][</span><span class="n">n2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">directed</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">[</span><span class="n">n2</span><span class="p">][</span><span class="n">n1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">weight</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">directed</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weighted</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)):</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">weights</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj_list</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph2</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">num_nodes2</span><span class="p">,</span> <span class="n">edges2</span><span class="p">,</span> <span class="n">weighted</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">graph2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: [(1, 3), (3, 2), (8, 4)]
+1: [(0, 3), (7, 4)]
+2: [(7, 2), (3, 6), (5, 1)]
+3: [(0, 2), (2, 6), (4, 1)]
+4: [(3, 1), (8, 8)]
+5: [(2, 1), (6, 8)]
+6: [(5, 8)]
+7: [(1, 4), (2, 2)]
+8: [(0, 4), (4, 8)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">graph3</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">num_nodes3</span><span class="p">,</span> <span class="n">edges3</span><span class="p">,</span> <span class="n">directed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">graph3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: [1]
+1: [2]
+2: [3, 4]
+3: [0]
+4: [2]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="graph-traversal">
+<h2>5.2 Graph Traversal<a class="headerlink" href="#graph-traversal" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="breadth-first-search">
+<h3>5.2.1 Breadth-first search 广度优先搜索<a class="headerlink" href="#breadth-first-search" title="Permalink to this headline">¶</a></h3>
+<p>A real-world graph:</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/MapGermanyGraph.svg/500px-MapGermanyGraph.svg.png" /></p>
+<p>Breadth-fist search tree (starting from Frankfurt):</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/GermanyBFS.svg/500px-GermanyBFS.svg.png" /></p>
+<p>BFS pseudocode (Wikipedia):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="mi">1</span>  <span class="n">procedure</span> <span class="n">BFS</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span> <span class="ow">is</span>
+ <span class="mi">2</span>      <span class="n">let</span> <span class="n">Q</span> <span class="n">be</span> <span class="n">a</span> <span class="n">queue</span>
+ <span class="mi">3</span>      <span class="n">label</span> <span class="n">root</span> <span class="k">as</span> <span class="n">discovered</span>
+ <span class="mi">4</span>      <span class="n">Q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+ <span class="mi">5</span>      <span class="k">while</span> <span class="n">Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span> <span class="n">do</span>
+ <span class="mi">6</span>          <span class="n">v</span> <span class="o">:=</span> <span class="n">Q</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+ <span class="mi">7</span>          <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">goal</span> <span class="n">then</span>
+ <span class="mi">8</span>              <span class="k">return</span> <span class="n">v</span>
+ <span class="mi">9</span>          <span class="k">for</span> <span class="nb">all</span> <span class="n">edges</span> <span class="kn">from</span> <span class="nn">v</span> <span class="n">to</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">adjacentEdges</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="n">do</span>
+<span class="mi">10</span>              <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">labeled</span> <span class="k">as</span> <span class="n">discovered</span> <span class="n">then</span>
+<span class="mi">11</span>                  <span class="n">label</span> <span class="n">w</span> <span class="k">as</span> <span class="n">discovered</span>
+<span class="mi">12</span>                  <span class="n">Q</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="https://cdn.programiz.com/sites/tutorial2program/files/queue-implementation.png" width="400"><blockquote>
+<div><p><strong>Question</strong>: Implement breadth-first search given a source node in a graph using Python.</p>
+</div></blockquote>
+<img src="https://i.imgur.com/E2Up1Pk.png" width="400"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span>
+    
+    <span class="n">visited</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">distance</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">while</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">queue</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">current</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">distance</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="n">distance</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+                <span class="n">parent</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">current</span>
+        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">queue</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">parent</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bfs</span><span class="p">(</span><span class="n">graph1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([0, 1, 4, 2, 3], [0, 1, 2, 2, 1], [None, 0, 1, 1, 0])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="depth-first-search">
+<h3>5.2.2 Depth-first Search 深度优先搜索<a class="headerlink" href="#depth-first-search" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Depth-first search<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Depth-First-Search.gif/440px-Depth-First-Search.gif" /></p>
+<p>DFS pseudocode (Wikipedia):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">procedure</span> <span class="n">DFS_iterative</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">is</span>
+    <span class="n">let</span> <span class="n">S</span> <span class="n">be</span> <span class="n">a</span> <span class="n">stack</span>
+    <span class="n">S</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">S</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span> <span class="n">do</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">labeled</span> <span class="k">as</span> <span class="n">discovered</span> <span class="n">then</span>
+            <span class="n">label</span> <span class="n">v</span> <span class="k">as</span> <span class="n">discovered</span>
+            <span class="k">for</span> <span class="nb">all</span> <span class="n">edges</span> <span class="kn">from</span> <span class="nn">v</span> <span class="n">to</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">adjacentEdges</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="n">do</span> 
+                <span class="n">S</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="https://cdn.programiz.com/sites/tutorial2program/files/stack.png" width="400"><blockquote>
+<div><p><strong>Question</strong>: Implement depth first search from a given node in a graph using Python.</p>
+</div></blockquote>
+<img src="https://i.imgur.com/E2Up1Pk.png" width="400"><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">current</span><span class="p">]:</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">current</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                    <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfs</span><span class="p">(</span><span class="n">graph1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 4, 3, 2, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="comparision-and-complexity">
+<h3>5.2.3 Comparision and Complexity<a class="headerlink" href="#comparision-and-complexity" title="Permalink to this headline">¶</a></h3>
+<p>Time complexity are both <span class="math notranslate nohighlight">\(O(n+e)\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of node and <span class="math notranslate nohighlight">\(e\)</span> is the number of edges.</p>
+<p><a class="reference external" href="https://www.geeksforgeeks.org/difference-between-bfs-and-dfs/">Comparison of BFS and DFS</a></p>
+</div>
+</div>
+<div class="section" id="shortest-paths">
+<h2>5.3 Shortest Paths<a class="headerlink" href="#shortest-paths" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><strong>Question</strong>: Write a function to find the length of the shortest path between two nodes in a weighted directed graph.</p>
+</div></blockquote>
+<img src="https://i.imgur.com/Zn5cUkO.png" width="480">
+<p><strong>Dijkstra’s algorithm (Wikipedia)</strong>:</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/5/57/Dijkstra_Animation.gif" /></p>
+<ol class="simple">
+<li><p>Mark all nodes unvisited. Create a set of all the unvisited nodes called the unvisited set.</p></li>
+<li><p>Assign to every node a tentative distance value: set it to zero for our initial node and to infinity for all other nodes. Set the initial node as current.[16]</p></li>
+<li><p>For the current node, consider all of its unvisited neighbours and calculate their tentative distances through the current node. Compare the newly calculated tentative distance to the current assigned value and assign the smaller one. For example, if the current node A is marked with a distance of 6, and the edge connecting it with a neighbour B has length 2, then the distance to B through A will be 6 + 2 = 8. If B was previously marked with a distance greater than 8 then change it to 8. Otherwise, the current value will be kept.</p></li>
+<li><p>When we are done considering all of the unvisited neighbours of the current node, mark the current node as visited and remove it from the unvisited set. A visited node will never be checked again.</p></li>
+<li><p>If the destination node has been marked visited (when planning a route between two specific nodes) or if the smallest tentative distance among the nodes in the unvisited set is infinity (when planning a complete traversal; occurs when there is no connection between the initial node and remaining unvisited nodes), then stop. The algorithm has finished.</p></li>
+<li><p>Otherwise, select the unvisited node that is marked with the smallest tentative distance, set it as the new “current node”, and go back to step 3.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_distances</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+    <span class="n">neighbours</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">neighbours</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]:</span>
+            <span class="n">distance</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">distance</span><span class="p">[</span><span class="n">neighbour</span><span class="p">],</span>
+                                      <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">distance</span><span class="p">[</span><span class="n">current</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">pick_next_node</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+    <span class="n">min_distance</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+    <span class="n">min_node</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span><span class="n">distance</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">distance</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="ow">and</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">min_distance</span><span class="p">:</span>
+            <span class="n">min_distance</span> <span class="o">=</span> <span class="n">distance</span>
+            <span class="n">min_node</span> <span class="o">=</span> <span class="n">node</span>
+    <span class="k">return</span> <span class="n">min_node</span>
+
+<span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">dest</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;infinity&#39;</span><span class="p">)]</span> <span class="o">*</span> <span class="n">graph</span><span class="o">.</span><span class="n">num_nodes</span>
+
+    <span class="n">distance</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">dest</span><span class="p">]</span> <span class="ow">and</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">adj_list</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">queue</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">update_distances</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">current</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">next_node</span> <span class="o">=</span> <span class="n">pick_next_node</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">next_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_node</span><span class="p">)</span>
+            
+        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="k">return</span> <span class="n">distance</span><span class="p">[</span><span class="n">dest</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">weighted</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">directed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">graph</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: [(1, 4), (2, 2)]
+1: [(2, 5), (3, 10)]
+2: [(4, 3)]
+3: [(5, 11)]
+4: [(3, 4)]
+5: []
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shortest_path</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Data_structure"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="dynamic-programming-problems.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">4 Recursion and Dynamic Programming 递归 &amp; 动态规划</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Leetcode.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Leetcode Solutions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jinzhao Yu<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
