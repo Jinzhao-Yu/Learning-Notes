@@ -1,0 +1,1818 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4 Recursion and Dynamic Programming 递归 &amp; 动态规划 &#8212; Jinzhao&#39;s Learning Notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Leetcode Solutions" href="Leetcode.html" />
+    <link rel="prev" title="3 Merge Sort, Quicksort and Divide-and-Conquer Algorithms" href="sort.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/ai-vs-ml-1200.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Jinzhao's Learning Notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Jinzhao’s Mind Palance
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Structure
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="README.html">
+   Data Structure Intro
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="binary-search.html">
+     1 Binary Search
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="binary-search-trees.html">
+     2 Binary Search Trees, Traversals and Balancing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="sort.html">
+     3 Merge Sort, Quicksort and Divide-and-Conquer Algorithms
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4 Recursion and Dynamic Programming 递归 &amp; 动态规划
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Leetcode.html">
+     Leetcode Solutions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Deep_Learning/Pytorch/README.html">
+   Pytorch Tutorial
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Pytorch/Pytorch-tutorial1.html">
+     Pytorch Tensor Tutorial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Deep_Learning/Related_Papers/README.html">
+   Related Papers
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Related_Papers/cSG-MCMC.html">
+     CYCLICAL STOCHASTIC GRADIENT MCMC FOR BAYESIAN DEEP LEARNING
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Deep_Learning/Related_Papers/RigL.html">
+     Rigging the Lottery: Making All Tickets Winners
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Quant Skills
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Quant/README.html">
+   Quant Skills Intro
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Backup Template
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Data_structure/dynamic-programming-problems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Jinzhao-Yu/Learning-Notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Jinzhao-Yu/Learning-Notes/issues/new?title=Issue%20on%20page%20%2FData_structure/dynamic-programming-problems.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/Jinzhao-Yu/Learning-Notes/edit/master/Data_structure/dynamic-programming-problems.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Jinzhao-Yu/Learning-Notes/master?urlpath=tree/Data_structure/dynamic-programming-problems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#longest-common-subsequence">
+   4.1 Longest Common Subsequence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-case">
+     General case
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-cases">
+     Test cases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursive-solution">
+     4.1.1 Recursive Solution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursive-solution-with-memoization">
+     4.1.2 Recursive Solution with Memoization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dynamic-programming">
+     4.1.3 Dynamic programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#knapsack-problem">
+   4.2 0-1 Knapsack Problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursion">
+     4.2.1 Recursion
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursion-with-memoization">
+     4.2.2 Recursion with Memoization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     4.2.3  Dynamic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4 Recursion and Dynamic Programming 递归 & 动态规划</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#longest-common-subsequence">
+   4.1 Longest Common Subsequence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-case">
+     General case
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-cases">
+     Test cases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursive-solution">
+     4.1.1 Recursive Solution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursive-solution-with-memoization">
+     4.1.2 Recursive Solution with Memoization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dynamic-programming">
+     4.1.3 Dynamic programming
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#knapsack-problem">
+   4.2 0-1 Knapsack Problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursion">
+     4.2.1 Recursion
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursion-with-memoization">
+     4.2.2 Recursion with Memoization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     4.2.3  Dynamic Programming
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="recursion-and-dynamic-programming">
+<h1>4 Recursion and Dynamic Programming 递归 &amp; 动态规划<a class="headerlink" href="#recursion-and-dynamic-programming" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="longest-common-subsequence">
+<h2>4.1 Longest Common Subsequence<a class="headerlink" href="#longest-common-subsequence" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><strong>QUESTION 1</strong>: Write a function to find the length of the <strong>longest common subsequence</strong> between two sequences. E.g. Given the strings “serendipitous” and “precipitation”, the longest common subsequence is “reipito” and its length is 7.</p>
+<p>A “sequence” is a group of items with a deterministic ordering. Lists, tuples and ranges are some common sequence types in Python.</p>
+<p>A “subsequence” is a sequence obtained by deleting zero or more elements from another sequence. For example, “edpt” is a subsequence of “serendipitous”.</p>
+</div></blockquote>
+<div class="section" id="general-case">
+<h3>General case<a class="headerlink" href="#general-case" title="Permalink to this headline">¶</a></h3>
+<img src="https://i.imgur.com/ry4Y0wS.png" width="420">
+</div>
+<div class="section" id="test-cases">
+<h3>Test cases<a class="headerlink" href="#test-cases" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>General case (string)</p></li>
+<li><p>General case (list)</p></li>
+<li><p>No common subsequence</p></li>
+<li><p>One is a subsequence of the other</p></li>
+<li><p>One sequence is empty</p></li>
+<li><p>Both sequences are empty</p></li>
+<li><p>Multiple subsequences with same length</p>
+<ol class="simple">
+<li><p>“abcdef” and “badcfe”</p></li>
+</ol>
+</li>
+</ol>
+<p>Longest common subsequence test cases:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T0</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;serendipitous&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;precipitation&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">7</span>
+<span class="p">}</span>
+
+<span class="n">T1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+
+<span class="n">T2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;longest&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;stone&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="n">T3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;asdfwevad&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;opkpoiklklj&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="n">T4</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;dense&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;condensed&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+
+<span class="n">T5</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;opkpoiklklj&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="n">T6</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="n">T7</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;seq1&#39;</span><span class="p">:</span> <span class="s1">&#39;abcdef&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;seq2&#39;</span><span class="p">:</span> <span class="s1">&#39;badcfe&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lcq_tests</span> <span class="o">=</span> <span class="p">[</span><span class="n">T0</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">T4</span><span class="p">,</span> <span class="n">T5</span><span class="p">,</span> <span class="n">T6</span><span class="p">,</span> <span class="n">T7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="recursive-solution">
+<h3>4.1.1 Recursive Solution<a class="headerlink" href="#recursive-solution" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Create two counters <code class="docutils literal notranslate"><span class="pre">idx1</span></code> and <code class="docutils literal notranslate"><span class="pre">idx2</span></code> starting at 0. Our recursive function will compute the LCS of <code class="docutils literal notranslate"><span class="pre">seq1[idx1:]</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2[idx2:]</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">seq1[idx1]</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2[idx2]</span></code> are equal, then this character belongs to the LCS of <code class="docutils literal notranslate"><span class="pre">seq1[idx1:]</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2[idx2:]</span></code> (why?). Further the length this is LCS is one more than LCS of <code class="docutils literal notranslate"><span class="pre">seq1[idx1+1:]</span></code> and  <code class="docutils literal notranslate"><span class="pre">seq2[idx2+1:]</span></code></p></li>
+</ol>
+<img src="https://i.imgur.com/um7LDiX.png" width="400">
+<ol class="simple">
+<li><p>If not, then the LCS of <code class="docutils literal notranslate"><span class="pre">seq1[idx1:]</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2[idx2:]</span></code> is the longer one among the LCS of <code class="docutils literal notranslate"><span class="pre">seq1[idx1+1:],</span> <span class="pre">seq2[idx2:]</span></code> and the LCS of <code class="docutils literal notranslate"><span class="pre">seq1[idx1:]</span></code>, <code class="docutils literal notranslate"><span class="pre">seq2[idx2+1:]</span></code></p></li>
+</ol>
+<img src="https://i.imgur.com/DRanmOy.png" width="360">
+<ol class="simple">
+<li><p>If either <code class="docutils literal notranslate"><span class="pre">seq1[idx1:]</span></code> or <code class="docutils literal notranslate"><span class="pre">seq2[idx2:]</span></code> is empty, then their LCS is empty.</p></li>
+</ol>
+<p>Here’s what the tree of recursive calls looks like:</p>
+<p><img alt="" src="https://i.imgur.com/JJrq3KH.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lcs_rec</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">idx1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx2</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span><span class="o">==</span><span class="n">idx1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span><span class="o">==</span><span class="n">idx2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">seq1</span><span class="p">[</span><span class="n">idx1</span><span class="p">]</span> <span class="o">==</span> <span class="n">seq2</span><span class="p">[</span><span class="n">idx2</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">+</span><span class="n">lcs_rec</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">idx1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">lcs_rec</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">idx1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">),</span> <span class="n">lcs_rec</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jovian.pythondsa</span> <span class="kn">import</span> <span class="n">evaluate_test_cases</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">if (window.IPython && IPython.notebook.kernel) IPython.notebook.kernel.execute('jovian.utils.jupyter.get_notebook_name_saved = lambda: "' + IPython.notebook.notebook_name + '"')</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">evaluate_test_cases</span><span class="p">(</span><span class="n">lcs_rec</span><span class="p">,</span> <span class="n">lcq_tests</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">TEST CASE #0</span>
+
+Input:
+{&#39;seq1&#39;: &#39;serendipitous&#39;, &#39;seq2&#39;: &#39;precipitation&#39;}
+
+Expected Output:
+7
+
+
+Actual Output:
+7
+
+Execution Time:
+273.414 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #1</span>
+
+Input:
+{&#39;seq1&#39;: [1, 3, 5, 6, 7, 2, 5, 2, 3], &#39;seq2&#39;: [6, 2, 4, 7, 1, 5, 6, 2, 3]}
+
+Expected Output:
+5
+
+
+Actual Output:
+5
+
+Execution Time:
+3.762 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #2</span>
+
+Input:
+{&#39;seq1&#39;: &#39;longest&#39;, &#39;seq2&#39;: &#39;stone&#39;}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.165 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #3</span>
+
+Input:
+{&#39;seq1&#39;: &#39;asdfwevad&#39;, &#39;seq2&#39;: &#39;opkpoiklklj&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+71.515 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #4</span>
+
+Input:
+{&#39;seq1&#39;: &#39;dense&#39;, &#39;seq2&#39;: &#39;condensed&#39;}
+
+Expected Output:
+5
+
+
+Actual Output:
+5
+
+Execution Time:
+0.093 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #5</span>
+
+Input:
+{&#39;seq1&#39;: &#39;&#39;, &#39;seq2&#39;: &#39;opkpoiklklj&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.001 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #6</span>
+
+Input:
+{&#39;seq1&#39;: &#39;&#39;, &#39;seq2&#39;: &#39;&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.001 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #7</span>
+
+Input:
+{&#39;seq1&#39;: &#39;abcdef&#39;, &#39;seq2&#39;: &#39;badcfe&#39;}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.031 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">SUMMARY</span>
+
+TOTAL: 8, PASSED: 8, FAILED: 0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Complexity Analysis</p></li>
+</ul>
+<p>Worst case occurs when each time we have to try 2 subproblems i.e. when the sequences have no common elements.</p>
+<img src="https://i.imgur.com/z5m36m8.png" width="360">
+<p>Here’s what the tree looks like in such a case (source - Techie Delight):</p>
+<img src="https://i.imgur.com/n8ZgBYj.png" width="500">
+<p>All the leaf nodes are <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code>. Can you count the number of leaf nodes?</p>
+<p><em>HINT</em>: Count the number of unique paths from root to leaf. The length of each path is <code class="docutils literal notranslate"><span class="pre">m+n</span></code> and at each level there are 2 choices.</p>
+<p>Based on the above can you infer that the time complexity is <span class="math notranslate nohighlight">\(O(2^{m+n})\)</span>.</p>
+</div>
+<div class="section" id="recursive-solution-with-memoization">
+<h3>4.1.2 Recursive Solution with Memoization<a class="headerlink" href="#recursive-solution-with-memoization" title="Permalink to this headline">¶</a></h3>
+<p>This time we will use a dictionary called <code class="docutils literal notranslate"><span class="pre">memo</span></code> to save the results, and if we find that an intermediate result already exists in the <code class="docutils literal notranslate"><span class="pre">memo</span></code>, we won’t calculate it again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lcs_memo</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">):</span>
+    <span class="n">memo</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">recurse</span><span class="p">(</span><span class="n">idx1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx2</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">memo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">idx1</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span> <span class="ow">or</span> <span class="n">idx2</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">):</span>
+            <span class="n">memo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">seq1</span><span class="p">[</span><span class="n">idx1</span><span class="p">]</span><span class="o">==</span><span class="n">seq2</span><span class="p">[</span><span class="n">idx2</span><span class="p">]:</span>
+            <span class="n">memo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="n">recurse</span><span class="p">(</span><span class="n">idx1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">memo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">recurse</span><span class="p">(</span><span class="n">idx1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">),</span> <span class="n">recurse</span><span class="p">(</span><span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">recurse</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">evaluate_test_cases</span><span class="p">(</span><span class="n">lcs_memo</span><span class="p">,</span> <span class="n">lcq_tests</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">TEST CASE #0</span>
+
+Input:
+{&#39;seq1&#39;: &#39;serendipitous&#39;, &#39;seq2&#39;: &#39;precipitation&#39;}
+
+Expected Output:
+7
+
+
+Actual Output:
+7
+
+Execution Time:
+0.424 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #1</span>
+
+Input:
+{&#39;seq1&#39;: [1, 3, 5, 6, 7, 2, 5, 2, 3], &#39;seq2&#39;: [6, 2, 4, 7, 1, 5, 6, 2, 3]}
+
+Expected Output:
+5
+
+
+Actual Output:
+5
+
+Execution Time:
+0.158 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #2</span>
+
+Input:
+{&#39;seq1&#39;: &#39;longest&#39;, &#39;seq2&#39;: &#39;stone&#39;}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.294 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #3</span>
+
+Input:
+{&#39;seq1&#39;: &#39;asdfwevad&#39;, &#39;seq2&#39;: &#39;opkpoiklklj&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+1.353 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #4</span>
+
+Input:
+{&#39;seq1&#39;: &#39;dense&#39;, &#39;seq2&#39;: &#39;condensed&#39;}
+
+Expected Output:
+5
+
+
+Actual Output:
+5
+
+Execution Time:
+0.072 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #5</span>
+
+Input:
+{&#39;seq1&#39;: &#39;&#39;, &#39;seq2&#39;: &#39;opkpoiklklj&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.004 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #6</span>
+
+Input:
+{&#39;seq1&#39;: &#39;&#39;, &#39;seq2&#39;: &#39;&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.003 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #7</span>
+
+Input:
+{&#39;seq1&#39;: &#39;abcdef&#39;, &#39;seq2&#39;: &#39;badcfe&#39;}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.04 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">SUMMARY</span>
+
+TOTAL: 8, PASSED: 8, FAILED: 0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Complexity Analysis:<br />
+Time complexity is <span class="math notranslate nohighlight">\(O(m*n)\)</span>, much better than <span class="math notranslate nohighlight">\(O(2^{m+n})\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="dynamic-programming">
+<h3>4.1.3 Dynamic programming<a class="headerlink" href="#dynamic-programming" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Create a table of size <code class="docutils literal notranslate"><span class="pre">(n1+1)</span> <span class="pre">*</span> <span class="pre">(n2+1)</span></code> initialized with 0s, where <code class="docutils literal notranslate"><span class="pre">n1</span></code> and <code class="docutils literal notranslate"><span class="pre">n2</span></code> are the lengths of the sequences. <code class="docutils literal notranslate"><span class="pre">table[i][j]</span></code> represents the longest common subsequence of <code class="docutils literal notranslate"><span class="pre">seq1[:i]</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2[:j]</span></code>. Here’s what the table looks like (source: Kevin Mavani, Medium).</p></li>
+</ol>
+<img src="https://i.imgur.com/SAsEol6.png">
+<ol class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">seq1[i]</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2[j]</span></code> are equal, then <code class="docutils literal notranslate"><span class="pre">table[i+1][j+1]</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">table[i][j]</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">seq1[i]</span></code> and <code class="docutils literal notranslate"><span class="pre">seq2[j]</span></code> are not equal, then <code class="docutils literal notranslate"><span class="pre">table[i+1][j+1]</span> <span class="pre">=</span> <span class="pre">max(table[i][j+1],</span> <span class="pre">table[i+1][j])</span></code></p></li>
+</ol>
+<p>The time complexity of the dynamic programming approach is <span class="math notranslate nohighlight">\(O(N1 * N2)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lcs_dp</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">idx1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">seq1</span><span class="p">[</span><span class="n">idx1</span><span class="p">]</span><span class="o">==</span><span class="n">seq2</span><span class="p">[</span><span class="n">idx2</span><span class="p">]:</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">idx1</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">idx2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="n">results</span><span class="p">[</span><span class="n">idx1</span><span class="p">][</span><span class="n">idx2</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">idx1</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">idx2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">idx1</span><span class="p">][</span><span class="n">idx2</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="n">idx1</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">idx2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">evaluate_test_cases</span><span class="p">(</span><span class="n">lcs_dp</span><span class="p">,</span> <span class="n">lcq_tests</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">TEST CASE #0</span>
+
+Input:
+{&#39;seq1&#39;: &#39;serendipitous&#39;, &#39;seq2&#39;: &#39;precipitation&#39;}
+
+Expected Output:
+7
+
+
+Actual Output:
+7
+
+Execution Time:
+0.231 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #1</span>
+
+Input:
+{&#39;seq1&#39;: [1, 3, 5, 6, 7, 2, 5, 2, 3], &#39;seq2&#39;: [6, 2, 4, 7, 1, 5, 6, 2, 3]}
+
+Expected Output:
+5
+
+
+Actual Output:
+5
+
+Execution Time:
+0.11 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #2</span>
+
+Input:
+{&#39;seq1&#39;: &#39;longest&#39;, &#39;seq2&#39;: &#39;stone&#39;}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.057 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #3</span>
+
+Input:
+{&#39;seq1&#39;: &#39;asdfwevad&#39;, &#39;seq2&#39;: &#39;opkpoiklklj&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.13 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #4</span>
+
+Input:
+{&#39;seq1&#39;: &#39;dense&#39;, &#39;seq2&#39;: &#39;condensed&#39;}
+
+Expected Output:
+5
+
+
+Actual Output:
+5
+
+Execution Time:
+0.064 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #5</span>
+
+Input:
+{&#39;seq1&#39;: &#39;&#39;, &#39;seq2&#39;: &#39;opkpoiklklj&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.01 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #6</span>
+
+Input:
+{&#39;seq1&#39;: &#39;&#39;, &#39;seq2&#39;: &#39;&#39;}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.008 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #7</span>
+
+Input:
+{&#39;seq1&#39;: &#39;abcdef&#39;, &#39;seq2&#39;: &#39;badcfe&#39;}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.056 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">SUMMARY</span>
+
+TOTAL: 8, PASSED: 8, FAILED: 0
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Complexity Analysis:<br />
+The time complexity is <span class="math notranslate nohighlight">\(O(m*n)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="knapsack-problem">
+<h2>4.2 0-1 Knapsack Problem<a class="headerlink" href="#knapsack-problem" title="Permalink to this headline">¶</a></h2>
+<p>Problem statement</p>
+<blockquote>
+<div><p>You’re in charge of selecting a football (soccer) team from a large pool of players. Each player has a cost, and a rating. You have a limited budget. What is the highest total rating of a team that fits within your budget. Assume that there’s no minimum or maximum team size.</p>
+</div></blockquote>
+<p>General problem statemnt:<br />
+Given n elements, each of which has a weight and a profit, determine the maximum profit that can be obtained by selecting a subset of the elements weighing no more than w.</p>
+<img src="https://i.imgur.com/4O919vu.png" width="400">
+<p>Test cases:</p>
+<ol class="simple">
+<li><p>Some generic test cases</p></li>
+<li><p>All the elements can be included</p></li>
+<li><p>None of the elements can be included</p></li>
+<li><p>Only one of the elements can be included</p></li>
+<li><p>???</p></li>
+</ol>
+<p>Knapsack test cases:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test0</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;capacity&#39;</span><span class="p">:</span> <span class="mi">165</span><span class="p">,</span>
+        <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">82</span><span class="p">],</span>
+        <span class="s1">&#39;profits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">72</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">309</span>
+<span class="p">}</span>
+
+<span class="n">test1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;capacity&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="s1">&#39;profits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="n">test2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;capacity&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="s1">&#39;profits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="n">test3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;capacity&#39;</span><span class="p">:</span> <span class="mi">170</span><span class="p">,</span>
+        <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">41</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>
+        <span class="s1">&#39;profits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">442</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">511</span><span class="p">,</span> <span class="mi">593</span><span class="p">,</span> <span class="mi">546</span><span class="p">,</span> <span class="mi">564</span><span class="p">,</span> <span class="mi">617</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">1735</span>
+<span class="p">}</span>
+
+<span class="n">test4</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;capacity&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="s1">&#39;profits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">6</span>
+<span class="p">}</span>
+
+<span class="n">test5</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;capacity&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="s1">&#39;profits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="mi">19</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tests</span> <span class="o">=</span> <span class="p">[</span><span class="n">test0</span><span class="p">,</span> <span class="n">test1</span><span class="p">,</span> <span class="n">test2</span><span class="p">,</span> <span class="n">test3</span><span class="p">,</span> <span class="n">test4</span><span class="p">,</span> <span class="n">test5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="recursion">
+<h3>4.2.1 Recursion<a class="headerlink" href="#recursion" title="Permalink to this headline">¶</a></h3>
+<img src="https://i.imgur.com/eaJzv02.png" width="400">
+<ol>
+<li><p>We’ll write a recursive function that computes <code class="docutils literal notranslate"><span class="pre">max_profit(weights[idx:],</span> <span class="pre">profits[idx:],</span> <span class="pre">capacity)</span></code>, with <code class="docutils literal notranslate"><span class="pre">idx</span></code> starting from 0.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">weights[idx]</span> <span class="pre">&gt;</span> <span class="pre">capacity</span></code>, the current element is cannot be selected, so the maximum profit is the same as <code class="docutils literal notranslate"><span class="pre">max_profit(weights[idx+1:],</span> <span class="pre">profits[idx+1:],</span> <span class="pre">capacity)</span></code>.</p></li>
+<li><p>Otherwise, there are two possibilities: we either pick <code class="docutils literal notranslate"><span class="pre">weights[idx]</span></code> or don’t. We can recursively compute the maximum</p>
+<p>A. If we don’t pick <code class="docutils literal notranslate"><span class="pre">weights[idx]</span></code>, once again the maximum profit for this case is <code class="docutils literal notranslate"><span class="pre">max_profit(weights[idx+1:],</span> <span class="pre">profits[idx+1:],</span> <span class="pre">capacity)</span></code></p>
+<p>B. If we pick <code class="docutils literal notranslate"><span class="pre">weights[idx]</span></code>, the maximum profit for this case is <code class="docutils literal notranslate"><span class="pre">profits[idx]</span> <span class="pre">+</span> <span class="pre">max_profit(weights[idx+1:],</span> <span class="pre">profits[idx+1:],</span> <span class="pre">capacity</span> <span class="pre">-</span> <span class="pre">weights[idx]</span></code></p>
+</li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">weights[idx:]</span></code> is empty, the maximum profit for this case is 0.</p></li>
+</ol>
+<p>Here’s a visualization of the recursion tree:</p>
+<img src="https://i.imgur.com/WsKTC6I.png" width="640">
+<p>Verify that the time complexity of the recursive algorithm is <span class="math notranslate nohighlight">\(O(2^N)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kp_rec</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">profits</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">idx</span><span class="p">:])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">weights</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">capacity</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">kp_rec</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">profits</span><span class="p">,</span> <span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">kp_rec</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">profits</span><span class="p">,</span> <span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">profits</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">+</span><span class="n">kp_rec</span><span class="p">(</span><span class="n">capacity</span><span class="o">-</span><span class="n">weights</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">weights</span><span class="p">,</span> <span class="n">profits</span><span class="p">,</span> <span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">evaluate_test_cases</span><span class="p">(</span><span class="n">kp_rec</span><span class="p">,</span> <span class="n">tests</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">TEST CASE #0</span>
+
+Input:
+{&#39;capacity&#39;: 165, &#39;weights&#39;: [23, 31, 29, 44, 53, 38, 63, 85, 89, 82], &#39;profits&#39;: [92, 57, 49, 68, 6...
+
+Expected Output:
+309
+
+
+Actual Output:
+309
+
+Execution Time:
+0.554 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #1</span>
+
+Input:
+{&#39;capacity&#39;: 3, &#39;weights&#39;: [4, 5, 6], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.007 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #2</span>
+
+Input:
+{&#39;capacity&#39;: 4, &#39;weights&#39;: [4, 5, 1], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.012 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #3</span>
+
+Input:
+{&#39;capacity&#39;: 170, &#39;weights&#39;: [41, 50, 49, 59, 55, 57, 60], &#39;profits&#39;: [442, 525, 511, 593, 546, 564,...
+
+Expected Output:
+1735
+
+
+Actual Output:
+1735
+
+Execution Time:
+0.164 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #4</span>
+
+Input:
+{&#39;capacity&#39;: 15, &#39;weights&#39;: [4, 5, 6], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+6
+
+
+Actual Output:
+6
+
+Execution Time:
+0.02 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #5</span>
+
+Input:
+{&#39;capacity&#39;: 15, &#39;weights&#39;: [4, 5, 1, 3, 2, 5], &#39;profits&#39;: [2, 3, 1, 5, 4, 7]}
+
+Expected Output:
+19
+
+
+Actual Output:
+19
+
+Execution Time:
+0.129 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">SUMMARY</span>
+
+TOTAL: 6, PASSED: 6, FAILED: 0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="recursion-with-memoization">
+<h3>4.2.2 Recursion with Memoization<a class="headerlink" href="#recursion-with-memoization" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kp_memo</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">profits</span><span class="p">):</span>
+    <span class="n">memo</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">recurse</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">remaining_c</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">remaining_c</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">memo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">key</span><span class="p">[</span><span class="n">memo</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">weights</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">remaining_c</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">recurse</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">remaining_c</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">recurse</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">remaining_c</span><span class="p">),</span>
+                       <span class="n">profits</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">+</span><span class="n">recurse</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">remaining_c</span><span class="o">-</span><span class="n">weights</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">recurse</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">capacity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_test_cases</span><span class="p">(</span><span class="n">kp_memo</span><span class="p">,</span> <span class="n">tests</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">TEST CASE #0</span>
+
+Input:
+{&#39;capacity&#39;: 165, &#39;weights&#39;: [23, 31, 29, 44, 53, 38, 63, 85, 89, 82], &#39;profits&#39;: [92, 57, 49, 68, 6...
+
+Expected Output:
+309
+
+
+Actual Output:
+309
+
+Execution Time:
+0.56 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #1</span>
+
+Input:
+{&#39;capacity&#39;: 3, &#39;weights&#39;: [4, 5, 6], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.012 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #2</span>
+
+Input:
+{&#39;capacity&#39;: 4, &#39;weights&#39;: [4, 5, 1], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.016 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #3</span>
+
+Input:
+{&#39;capacity&#39;: 170, &#39;weights&#39;: [41, 50, 49, 59, 55, 57, 60], &#39;profits&#39;: [442, 525, 511, 593, 546, 564,...
+
+Expected Output:
+1735
+
+
+Actual Output:
+1735
+
+Execution Time:
+0.14 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #4</span>
+
+Input:
+{&#39;capacity&#39;: 15, &#39;weights&#39;: [4, 5, 6], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+6
+
+
+Actual Output:
+6
+
+Execution Time:
+0.019 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #5</span>
+
+Input:
+{&#39;capacity&#39;: 15, &#39;weights&#39;: [4, 5, 1, 3, 2, 5], &#39;profits&#39;: [2, 3, 1, 5, 4, 7]}
+
+Expected Output:
+19
+
+
+Actual Output:
+19
+
+Execution Time:
+0.108 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">SUMMARY</span>
+
+TOTAL: 6, PASSED: 6, FAILED: 0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(309, True, 0.56),
+ (0, True, 0.012),
+ (3, True, 0.016),
+ (1735, True, 0.14),
+ (6, True, 0.019),
+ (19, True, 0.108)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>4.2.3  Dynamic Programming<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Create a table of size <code class="docutils literal notranslate"><span class="pre">(n+1)</span> <span class="pre">*</span> <span class="pre">(capacity+1)</span></code> consisting of all 0s, where is <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of elements. <code class="docutils literal notranslate"><span class="pre">table[i][c]</span></code> represents the maximum profit that can be obtained using the first <code class="docutils literal notranslate"><span class="pre">i</span></code> elements if the maximum capacity is <code class="docutils literal notranslate"><span class="pre">c</span></code>. Here’s a visual representation of a filled table (source - geeksforgeeks):</p></li>
+</ol>
+<img src="https://i2.wp.com/techieme.in/wp-content/uploads/01knapsack.png?w=1213" width="640">
+<p>(The 0th row will contain all zeros and is not shown above.)</p>
+<ol>
+<li><p>We’ll fill the table row by row and column by column. <code class="docutils literal notranslate"><span class="pre">table[i][c]</span></code> can be filled using some values in the row above it.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">weights[i]</span> <span class="pre">&gt;</span> <span class="pre">c</span></code> i.e. if the current element can is larger than capacity, then <code class="docutils literal notranslate"><span class="pre">table[i+1][c]</span></code> is simply equal to <code class="docutils literal notranslate"><span class="pre">table[i][c]</span></code> (since there’s no way we can pick this element).</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">weights[i]</span> <span class="pre">&lt;=</span> <span class="pre">c</span></code> then we have two choices: to either pick the current element or not to get the value of <code class="docutils literal notranslate"><span class="pre">table[i+1][c]</span></code>. We can compare the maximum profit for both these options and pick the better one as the value of <code class="docutils literal notranslate"><span class="pre">table[i][c]</span></code>.</p>
+<p>A. If we don’t pick  the element with weight <code class="docutils literal notranslate"><span class="pre">weights[i]</span></code>, then once again the maximum profit is <code class="docutils literal notranslate"><span class="pre">table[i][c]</span></code></p>
+<p>B. If we pick the element with weight <code class="docutils literal notranslate"><span class="pre">weights[i]</span></code>, then the maximum profit is <code class="docutils literal notranslate"><span class="pre">profits[i]</span> <span class="pre">+</span> <span class="pre">table[i][c-weights[i]]</span></code>, since we have used up some capacity.</p>
+</li>
+</ol>
+<p>Verify that the complexity of the dynamic programming solution is <span class="math notranslate nohighlight">\(O(N * W)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kp_dp</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">profits</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">capacity</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">capacity</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">c</span><span class="p">:</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">],</span>
+                                      <span class="n">profits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="o">-</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_test_cases</span><span class="p">(</span><span class="n">kp_dp</span><span class="p">,</span> <span class="n">tests</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">TEST CASE #0</span>
+
+Input:
+{&#39;capacity&#39;: 165, &#39;weights&#39;: [23, 31, 29, 44, 53, 38, 63, 85, 89, 82], &#39;profits&#39;: [92, 57, 49, 68, 6...
+
+Expected Output:
+309
+
+
+Actual Output:
+309
+
+Execution Time:
+1.463 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #1</span>
+
+Input:
+{&#39;capacity&#39;: 3, &#39;weights&#39;: [4, 5, 6], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+0
+
+
+Actual Output:
+0
+
+Execution Time:
+0.018 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #2</span>
+
+Input:
+{&#39;capacity&#39;: 4, &#39;weights&#39;: [4, 5, 1], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+3
+
+
+Actual Output:
+3
+
+Execution Time:
+0.023 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #3</span>
+
+Input:
+{&#39;capacity&#39;: 170, &#39;weights&#39;: [41, 50, 49, 59, 55, 57, 60], &#39;profits&#39;: [442, 525, 511, 593, 546, 564,...
+
+Expected Output:
+1735
+
+
+Actual Output:
+1735
+
+Execution Time:
+1.11 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #4</span>
+
+Input:
+{&#39;capacity&#39;: 15, &#39;weights&#39;: [4, 5, 6], &#39;profits&#39;: [1, 2, 3]}
+
+Expected Output:
+6
+
+
+Actual Output:
+6
+
+Execution Time:
+0.04 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">TEST CASE #5</span>
+
+Input:
+{&#39;capacity&#39;: 15, &#39;weights&#39;: [4, 5, 1, 3, 2, 5], &#39;profits&#39;: [2, 3, 1, 5, 4, 7]}
+
+Expected Output:
+19
+
+
+Actual Output:
+19
+
+Execution Time:
+0.06 ms
+
+Test Result:
+PASSED
+
+
+<span class=" -Color -Color-Bold">SUMMARY</span>
+
+TOTAL: 6, PASSED: 6, FAILED: 0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(309, True, 1.463),
+ (0, True, 0.018),
+ (3, True, 0.023),
+ (1735, True, 1.11),
+ (6, True, 0.04),
+ (19, True, 0.06)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Data_structure"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="sort.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">3 Merge Sort, Quicksort and Divide-and-Conquer Algorithms</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Leetcode.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Leetcode Solutions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jinzhao Yu<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
