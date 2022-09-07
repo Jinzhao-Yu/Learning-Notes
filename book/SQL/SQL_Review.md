@@ -1,0 +1,2 @@
+# MySQL Review
+- DISTINCT
