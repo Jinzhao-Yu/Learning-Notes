@@ -26,6 +26,9 @@ parts:
   - caption: Quant Skills
     chapters:
       - file: Quant/README.md
+  - caption: SQL
+    chapters:
+      - file: SQL/SQL_Review.md
   - caption: Backup Template
     chapters:
       - file: markdown.md
