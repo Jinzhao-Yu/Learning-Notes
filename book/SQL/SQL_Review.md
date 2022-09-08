@@ -22,6 +22,9 @@ LIMIT 11 OFFSET 9 #输出10-20行的数据
 SELECT RANK()OVER(PARTITION BY class ORDER BY score DESC) #返回跳跃排序排名，排序对象为score降序，窗口函数限定按class分开排序
 FROM table
 ```
+- **WHERE/HAVING** 设定一些筛选条件，要注意二者之间的区别！！！
+  - **WHERE** 是一个约束声明，是在查询结果集返回之前**约束来自数据库**的数据，且WHERE中不能使用聚合函数
+  - **HAVING** 是一个过滤声明，是在查询结果集返回以后**对查询结果进行的过滤操作**，在Having中可以使用聚合函数，通常与GROUP BY语句联合使用，用来过滤由GROUP BY语句返回的记录集
 ## 日期相关函数
 - **DATE()** 将datetime的格式转化为YYYY-MM-DD
 - **DATETIME()** 将datetime的格式转化为YYYY-MM-DD HH:MM:SS
